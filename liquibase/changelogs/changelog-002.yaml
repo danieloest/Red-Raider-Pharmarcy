@@ -1,0 +1,66 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-roles-table
+      author: RKeur
+      changes:
+        - createTable:
+            tableName: Roles
+            columns:
+              - column:
+                  name: RoleId
+                  type: BIGINT AUTO_INCREMENT
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_roles
+              - column:
+                  name: Name
+                  type: varchar(10)
+                  constraints:
+                    nullable: false
+                    unique: true
+  - changeSet:
+      id: add-user-table
+      author: RKeur
+      changes:
+        - createTable:
+            tableName: Users
+            columns:
+              - column:
+                  name: UserId
+                  type: BIGINT AUTO_INCREMENT
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_users
+              - column:
+                  name: Name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+                    unique: true
+  - changeSet:
+      id: add-user-roles-table
+      author: RKeur
+      changes:
+        - createTable:
+            tableName: UserRoles
+            columns:
+              - column:
+                  name: UserId
+                  type: BIGINT
+                  constraints:
+                    validateForeignKey: true
+                    foreignKeyName: fk_user_roles_user
+                    references: Users(UserId)
+              - column:
+                  name: RoleId
+                  type: BIGINT
+                  constraints:
+                    validateForeignKey: true
+                    foreignKeyName: fk_user_roles_role
+                    references: Roles(RoleId)
+        - addPrimaryKey:
+            tableName: UserRoles
+            constraintName: pk_user_roles
+            columnNames: UserId, RoleId
