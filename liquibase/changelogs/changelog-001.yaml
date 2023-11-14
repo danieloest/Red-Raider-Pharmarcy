@@ -47,6 +47,21 @@ databaseChangeLog:
                     nullable: false
                     primaryKey: true
                     primaryKeyName: pk_insurance
+              - column:
+                  name: Name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: Phone
+                  type: varchar(12)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: Address
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
   - changeSet:
       id: add-patient-table
       author: RKeur
