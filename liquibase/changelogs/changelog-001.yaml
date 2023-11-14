@@ -1,0 +1,95 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: RKeur
+      changes:
+        - createTable:
+            tableName: Doctor
+            columns:
+              - column:
+                  name: DoctorId
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_doctor
+              - column:
+                  name: FirstName
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: LastName
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: Email
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: Address
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 2
+      author: RKeur
+      changes:
+        - createTable:
+            tableName: Insurance
+            columns:
+              - column:
+                  name: InsuranceId
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_insurance
+  - changeSet:
+      id: 3
+      author: RKeur
+      changes:
+        - createTable:
+            tableName: Patient
+            columns:
+              - column:
+                  name: PatientId
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_patient
+              - column:
+                  name: FirstName
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: LastName
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: Email
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: Phone
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: Address
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: InsuranceCompanyId
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_insurance_company
+                    validateForeignKey: true
+                    references: Insurance(InsuranceId)
