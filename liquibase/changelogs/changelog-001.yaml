@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: 1
+      id: add-doctor-table
       author: RKeur
       changes:
         - createTable:
@@ -8,7 +8,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: DoctorId
-                  type: BIGINT
+                  type: BIGINT AUTO_INCREMENT
                   constraints:
                     nullable: false
                     primaryKey: true
@@ -34,7 +34,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
   - changeSet:
-      id: 2
+      id: add-insurance-table
       author: RKeur
       changes:
         - createTable:
@@ -42,13 +42,13 @@ databaseChangeLog:
             columns:
               - column:
                   name: InsuranceId
-                  type: BIGINT
+                  type: BIGINT AUTO_INCREMENT
                   constraints:
                     nullable: false
                     primaryKey: true
                     primaryKeyName: pk_insurance
   - changeSet:
-      id: 3
+      id: add-patient-table
       author: RKeur
       changes:
         - createTable:
@@ -56,7 +56,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: PatientId
-                  type: BIGINT
+                  type: BIGINT AUTO_INCREMENT
                   constraints:
                     nullable: false
                     primaryKey: true
@@ -93,3 +93,84 @@ databaseChangeLog:
                     foreignKeyName: fk_insurance_company
                     validateForeignKey: true
                     references: Insurance(InsuranceId)
+  - changeSet:
+      id: add-patient-doctor-table
+      author: RKeur
+      changes:
+        - createTable:
+            tableName: PatientDoctor
+            columns:
+              - column:
+                  name: PatientId
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_pat_doc_patient
+                    validateForeignKey: true
+                    references: Patient(PatientId)
+              - column:
+                  name: DoctorId
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_pat_doc_doctor
+                    validateForeignKey: true
+                    references: Doctor(DoctorId)
+          addPrimaryKey:
+            tableName: PatientDoctor
+            validate: true
+            constraintName: pk_patient_doctor
+            columnNames: PatientId, DoctorId
+  - changeSet:
+      id: add-prescription-table
+      author: RKeur
+      changes:
+        - createTable:
+            tableName: Prescription
+            columns:
+              - column:
+                  name: PrescriptionId
+                  type: BIGINT AUTO_INCREMENT
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_prescription
+              - column:
+                  name: Name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: Price
+                  type: DECIMAL(6,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: MaxDosage (mg)
+                  type: DECIMAL(8,2)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: add-patient-prescription-table
+      author: RKeur
+      changes:
+        - createTable:
+            tableName: PatientPrescription
+            columns:
+              - column:
+                  name: PatientId
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_pat_pres_patient
+                    validateForeignKey: true
+                    references: Patient(PatientId)
+              - column:
+                  name: PrescriptionId
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_pat_pres_prescription
+                    validateForeignKey: true
+                    references: Prescription(PrescriptionId)
+          addPrimaryKey:
+            tableName: PatientPrescription
+            validate: true
+            constraintName: pk_patient_prescription
+            columnNames: PatientId, PrescriptionId
