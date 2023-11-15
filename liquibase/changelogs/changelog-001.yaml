@@ -1,0 +1,191 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-doctor-table
+      author: RKeur
+      changes:
+        - createTable:
+            tableName: Doctor
+            columns:
+              - column:
+                  name: DoctorId
+                  type: BIGINT AUTO_INCREMENT
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_doctor
+              - column:
+                  name: FirstName
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: LastName
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: Email
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: Address
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: add-insurance-table
+      author: RKeur
+      changes:
+        - createTable:
+            tableName: Insurance
+            columns:
+              - column:
+                  name: InsuranceId
+                  type: BIGINT AUTO_INCREMENT
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_insurance
+              - column:
+                  name: Name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: Phone
+                  type: varchar(12)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: Address
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: add-patient-table
+      author: RKeur
+      changes:
+        - createTable:
+            tableName: Patient
+            columns:
+              - column:
+                  name: PatientId
+                  type: BIGINT AUTO_INCREMENT
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_patient
+              - column:
+                  name: FirstName
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: LastName
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: Email
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: Phone
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: Address
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: InsuranceCompanyId
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_insurance_company
+                    validateForeignKey: true
+                    references: Insurance(InsuranceId)
+  - changeSet:
+      id: add-patient-doctor-table
+      author: RKeur
+      changes:
+        - createTable:
+            tableName: PatientDoctor
+            columns:
+              - column:
+                  name: PatientId
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_pat_doc_patient
+                    validateForeignKey: true
+                    references: Patient(PatientId)
+              - column:
+                  name: DoctorId
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_pat_doc_doctor
+                    validateForeignKey: true
+                    references: Doctor(DoctorId)
+          addPrimaryKey:
+            tableName: PatientDoctor
+            validate: true
+            constraintName: pk_patient_doctor
+            columnNames: PatientId, DoctorId
+  - changeSet:
+      id: add-prescription-table
+      author: RKeur
+      changes:
+        - createTable:
+            tableName: Prescription
+            columns:
+              - column:
+                  name: PrescriptionId
+                  type: BIGINT AUTO_INCREMENT
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_prescription
+              - column:
+                  name: Name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: Price
+                  type: DECIMAL(6,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: MaxDosage (mg)
+                  type: DECIMAL(8,2)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: add-patient-prescription-table
+      author: RKeur
+      changes:
+        - createTable:
+            tableName: PatientPrescription
+            columns:
+              - column:
+                  name: PatientId
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_pat_pres_patient
+                    validateForeignKey: true
+                    references: Patient(PatientId)
+              - column:
+                  name: PrescriptionId
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_pat_pres_prescription
+                    validateForeignKey: true
+                    references: Prescription(PrescriptionId)
+          addPrimaryKey:
+            tableName: PatientPrescription
+            validate: true
+            constraintName: pk_patient_prescription
+            columnNames: PatientId, PrescriptionId
