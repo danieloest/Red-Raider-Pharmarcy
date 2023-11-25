@@ -46,7 +46,7 @@ sequelize
     });
 
 app.get('/', (req, res) => {
-    res.render("index.ejs")
+    res.render("signup.ejs")
 })
 app.get('/status', (req, res) => {
     const status = {
@@ -54,8 +54,8 @@ app.get('/status', (req, res) => {
     };
     res.send(status);
 })
-app.get('/signin', (req, res) => {
-    res.render("signin.ejs")
+app.get('/login', (req, res) => {
+    res.render("login.ejs")
 })
 /*
 
