@@ -1,12 +1,12 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const {conn, initLiquibase} = require("./database.js")
+const {initLiquibase} = require("./database.js")
 const UserRoutes = require("./routes/UserRoutes.js")
 const UserModel = require("./models/User");
 const {Sequelize} = require("sequelize");
-const {disable} = require("express/lib/application");
 
 const app = express();
+app.set("view engine, ejs")
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
 const port = 8080
@@ -45,20 +45,19 @@ sequelize
       console.error("Sequelize Initialisation threw an error:", err);
     });
 
-/*
 app.get('/', (req, res) => {
-  res.render("index.ejs")
+    res.render("index.ejs")
 })
 app.get('/status', (req, res) => {
-  const status = {
-    "Status": "Running"
-  };
-  res.send(status);
+    const status = {
+        "Status": "Running"
+    };
+    res.send(status);
 })
-
 app.get('/signin', (req, res) => {
-  res.render("signin.ejs")
+    res.render("signin.ejs")
 })
+/*
 
 app.use(express.static("public"));
 app.listen(port, () => {
