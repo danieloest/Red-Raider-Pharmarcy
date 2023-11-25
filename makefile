@@ -10,5 +10,11 @@ db-down:
 liquibase-update:
 	node-liquibase update --changeLogFile="liquibase/master-change-log.yaml" --url="jdbc:mysql://localhost:3307/pharmacy?createDatabaseIfNotExist=true" --username="root" --password="root" --classPath="liquibase/mysql-connector-j-8.2.0.jar" --driver="com.mysql.cj.jdbc.Driver"
 
-run-dev;
+run-dev:
 	npm run dev
+
+data-snapshot:
+	mysqldump -t -u root -proot pharmacy Users --result-file=db-snapshot.sql
+
+db-inserts:
+	 cat db-snapshot.sql | grep INSERT > db-inserts.sql

@@ -1,18 +1,59 @@
-import express from "express";
-import bodyParser from "body-parser";
-import {conn, initLiquibase} from "./database.js"
-const app = express()
-app.set("view engine, ejs")
+const express = require("express");
+const bodyParser = require("body-parser");
+const {conn, initLiquibase} = require("./database.js")
+const UserRoutes = require("./routes/UserRoutes.js")
+const UserModel = require("./models/User");
+const {Sequelize} = require("sequelize");
+const {disable} = require("express/lib/application");
+
+const app = express();
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }))
 const port = 8080
 
-initLiquibase().then(r => conn.connect(function (err) {
-  if (err) throw err;
-  console.log("Connected to MySql DB");
-}));
+app.use(express.json());
 
+const sequelize = new Sequelize({
+    database: process.env.MYSQL_DATABASE,
+    username: process.env.MYSQL_USERNAME,
+    password: process.env.MYSQL_PASSWORD,
+    dialect: "mysql",
+    define: {
+        timestamps: false
+    }
+    },
+)
+
+// Initialising the Model on sequelize
+UserModel.initialise(sequelize);
+
+// Syncing the models that are defined on sequelize with the tables that alredy exists
+// in the database. It creates models as tables that do not exist in the DB.
+sequelize
+    .sync()
+    .then(() => {
+      console.log("Sequelize Initialised!!");
+
+      // Attaching the Authentication and User Routes to the app.
+      app.use("/user", UserRoutes);
+
+      app.listen(port, () => {
+        console.log("Server Listening on PORT:", port);
+      });
+    })
+    .catch((err) => {
+      console.error("Sequelize Initialisation threw an error:", err);
+    });
+
+/*
 app.get('/', (req, res) => {
   res.render("index.ejs")
+})
+app.get('/status', (req, res) => {
+  const status = {
+    "Status": "Running"
+  };
+  res.send(status);
 })
 
 app.get('/signin', (req, res) => {
@@ -78,3 +119,4 @@ app.get('/patient/prescriptions', (req, res) => {
       console.log(err);
   })
 })
+ */

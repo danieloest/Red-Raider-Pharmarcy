@@ -134,3 +134,7 @@ dist
 *.iws
 *.iml
 *.ipr
+
+### Database files
+db-snapshot.sql
+db-inserts.sql
