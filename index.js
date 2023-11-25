@@ -6,7 +6,7 @@ const UserModel = require("./models/User");
 const {Sequelize} = require("sequelize");
 
 const app = express();
-app.set("view engine, ejs")
+app.set('view engine', 'ejs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
 const port = 8080
