@@ -27,14 +27,14 @@ const sequelize = new Sequelize({
 // Initialising the Model on sequelize
 UserModel.initialise(sequelize);
 
-// Syncing the models that are defined on sequelize with the tables that alredy exists
+// Syncing the models that are defined on sequelize with the tables that already exists
 // in the database. It creates models as tables that do not exist in the DB.
 sequelize
     .sync()
     .then(() => {
       console.log("Sequelize Initialised!!");
 
-      // Attaching the Authentication and User Routes to the app.
+      // Attaching the Routes to the app.
       app.use("/user", UserRoutes);
 
       app.listen(port, () => {
