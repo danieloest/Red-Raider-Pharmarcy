@@ -49,14 +49,15 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/status",
+					"raw": "http://localhost:8080/user/all",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"status"
+						"user",
+						"all"
 					]
 				}
 			},
@@ -126,7 +127,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/patient/prescriptions",
+					"raw": "http://localhost:8080/patient/doctors",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -134,7 +135,7 @@
 					"port": "8080",
 					"path": [
 						"patient",
-						"prescriptions"
+						"doctors"
 					]
 				}
 			},
