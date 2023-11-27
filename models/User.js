@@ -32,6 +32,10 @@ const UserModel = {
         type: DataTypes.STRING,
         allowNull: false
     },
+    role: {
+        type: DataTypes.ENUM("admin", "doctor", "patient"),
+        allowNull: false
+    },
 };
 
 module.exports = {

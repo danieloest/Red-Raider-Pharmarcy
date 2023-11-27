@@ -8,6 +8,14 @@ databaseChangeLog:
             relativeToPath: true
             dbms: 'mysql'
   - changeSet:
+      id: add-role-data
+      author: RKeur
+      changes:
+        - sqlFile:
+            path: liquibase/sql-scripts/role-inserts.sql
+            relativeToPath: true
+            dbms: 'mysql'
+  - changeSet:
       id: add-user-data
       author: RKeur
       changes:
