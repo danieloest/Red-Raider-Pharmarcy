@@ -33,7 +33,8 @@ const UserModel = {
         allowNull: false
     },
     role: {
-        type: DataTypes.ENUM("admin", "doctor", "patient"),
+        type: DataTypes.STRING,
+        enum: ["admin", "doctor", "patient"],
         allowNull: false
     },
 };

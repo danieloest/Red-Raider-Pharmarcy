@@ -1,25 +1,5 @@
 databaseChangeLog:
   - changeSet:
-      id: add-roles-table
-      author: RKeur
-      changes:
-        - createTable:
-            tableName: Roles
-            columns:
-              - column:
-                  name: Id
-                  type: BIGINT AUTO_INCREMENT
-                  constraints:
-                    nullable: false
-                    primaryKey: true
-                    primaryKeyName: pk_roles
-              - column:
-                  name: Name
-                  type: varchar(10)
-                  constraints:
-                    nullable: false
-                    unique: true
-  - changeSet:
       id: add-user-table
       author: RKeur
       changes:
@@ -64,9 +44,8 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: RoleId
-                  type: BIGINT
+                  name: role
+                  type: varchar(50)
                   constraints:
-                    validateForeignKey: true
-                    foreignKeyName: fk_user_role
-                    references: Roles(Id)
+                    nullable: false
+                    unique: true
