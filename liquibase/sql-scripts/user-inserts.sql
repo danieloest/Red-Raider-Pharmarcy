@@ -1,1 +1,1 @@
-INSERT INTO `Users` VALUES (1,'testUserName','test@email.com','testPassword',23,'Terry','Testerson');
+INSERT INTO `Users` VALUES (1,'TerryT','ttexen@email.com','p@ssword',23,'Terry','Texen','admin'),(2,'BarryM','bmarks@email.com','p@ssword1',19,'Barry','Marks','patient');
