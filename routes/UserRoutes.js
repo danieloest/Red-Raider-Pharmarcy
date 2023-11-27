@@ -8,7 +8,7 @@ router.get(
 );
 
 router.get(
-    "/all",
+    "/",
     UserController.getAllUsers
 );
 
