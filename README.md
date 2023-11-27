@@ -5,6 +5,16 @@
 - docker
 - make
 
+Create file named `.env` in root of project with the following variables:
+```
+MYSQL_HOST=localhost
+MYSQL_USERNAME=user
+MYSQL_PASSWORD=password
+MYSQL_DATABASE=pharmacy
+MYSQL_URL=jdbc:mysql://localhost:3306/pharmacy?createDatabaseIfNotExist=true
+MYSQL_DRIVER='com.mysql.cj.jdbc.Driver'
+```
+
 ## Running the application
 1. Run `make run-dev` or `npm run dev`
 2. Open browser and go to `http://localhost:8080/`
