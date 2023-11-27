@@ -33,32 +33,32 @@ const DoctorModel = {
 
 module.exports = {
   initialise: (sequelize) => {
-    this.model = sequelize.define("user", UserModel);
+    this.model = sequelize.define("doctor", DoctorModel);
   },
 
-  createUser: (user) => {
-    return this.model.create(user);
+  createDoctor: (doctor) => {
+    return this.model.create(doctor);
   },
 
-  findUser: (query) => {
+  findDoctor: (query) => {
     return this.model.findOne({
       where: query,
     });
   },
 
-  updateUser: (query, updatedValue) => {
+  updateDoctor: (query, updatedValue) => {
     return this.model.update(updatedValue, {
       where: query,
     });
   },
 
-  findAllUsers: (query) => {
+  findAllDoctors: (query) => {
     return this.model.findAll({
       where: query,
     });
   },
 
-  deleteUser: (query) => {
+  deleteDoctor: (query) => {
     return this.model.destroy({
       where: query,
     });
