@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-doctor-data
+      author: RKeur
+      changes:
+        - sqlFile:
+            path: liquibase/sql-scripts/doctor-inserts.sql
+            relativeToPath: true
+            dbms: 'mysql'
+  - changeSet:
+      id: add-user-data
+      author: RKeur
+      changes:
+        - sqlFile:
+            path: liquibase/sql-scripts/user-inserts.sql
+            relativeToPath: true
+            dbms: 'mysql'

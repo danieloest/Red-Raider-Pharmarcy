@@ -1,16 +1,10 @@
-import mysql from 'mysql2';
-import dotenv from 'dotenv';
-import {Liquibase} from 'liquibase';
+'use strict';
+const mysql = require("mysql2")
+const dotenv = require("dotenv")
+const {Liquibase} = require("liquibase");
 dotenv.config();
 
-export const conn = mysql.createConnection({
-    host: process.env.MYSQL_HOST,
-    database: process.env.MYSQL_DATABASE,
-    user: process.env.MYSQL_USERNAME,
-    password: process.env.MYSQL_PASSWORD
-})
-
-const myConfig = {
+const liquibaseConfig = {
     driver: process.env.MYSQL_DRIVER,
     classpath: 'liquibase/mysql-connector-j-8.2.0.jar',
     changeLogFile: 'liquibase/master-change-log.yaml',
@@ -19,17 +13,29 @@ const myConfig = {
     password: process.env.MYSQL_PASSWORD
 }
 
-export const liquibase = new Liquibase(myConfig);
+const pool = mysql.createPool({
+    host: process.env.MYSQL_HOST,
+    database: process.env.MYSQL_DATABASE,
+    user: process.env.MYSQL_USERNAME,
+    password: process.env.MYSQL_PASSWORD
+})
 
-export async function initLiquibase() {
+const liquibase = new Liquibase(liquibaseConfig);
+
+async function initLiquibase() {
     try {
-        console.log("Dropping database to re-initialize")
+        console.log("Dropping database")
         await liquibase.dropAll();
-        console.log("Running Liquibase changes")
+        console.log("Running liquibase changes")
         await liquibase.update();
-        console.log("Database ready to use")
-    }
-    catch (err) {
+        console.log("Liquibase complete")
+    } catch (err) {
         console.log("Liquibase startup failed, See error message: " + err.message);
     }
 }
+
+// Setup and run liquibase
+initLiquibase().then(r => pool.getConnection(function (err , connection) {
+    if (err) throw err;
+    console.log("Connected to MySql DB");
+}));
