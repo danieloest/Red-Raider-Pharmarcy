@@ -19,11 +19,6 @@ const DoctorModel = {
     allowNull: false,
     unique: true,
   },
-  phone: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    unique: true,
-  },
   address: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -33,7 +28,10 @@ const DoctorModel = {
 
 module.exports = {
   initialise: (sequelize) => {
-    this.model = sequelize.define("doctor", DoctorModel);
+    this.model = sequelize.define("doctor", DoctorModel, {
+      freezeTableName: true,
+      tableName: "doctor",
+    });
   },
 
   createDoctor: (doctor) => {
