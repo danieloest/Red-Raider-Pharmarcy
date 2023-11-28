@@ -10,9 +10,7 @@ module.exports = {
       .then((doctor) => {
         return res.status(200).json({
           status: true,
-          data: {
-            doctor,
-          },
+          data: doctor,
         });
       })
       .catch((err) => {

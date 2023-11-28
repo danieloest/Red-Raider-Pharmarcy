@@ -4,6 +4,7 @@ const { initLiquibase } = require("./database.js");
 const UserRoutes = require("./routes/UserRoutes.js");
 const DoctorRoutes = require("./routes/DoctorRoutes.js");
 const UserModel = require("./models/User");
+const DoctorModel = require("./models/Doctor");
 const { Sequelize } = require("sequelize");
 
 const app = express();
@@ -26,6 +27,7 @@ const sequelize = new Sequelize({
 
 // Initialising the Models on sequelize
 UserModel.initialise(sequelize);
+DoctorModel.initialise(sequelize);
 
 // Syncing the models that are defined on sequelize with the tables that already exists
 // in the database. It creates models as tables that do not exist in the DB.
