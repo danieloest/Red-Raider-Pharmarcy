@@ -1,28 +1,28 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const {initLiquibase} = require("./database.js")
-const UserRoutes = require("./routes/UserRoutes.js")
+const { initLiquibase } = require("./database.js");
+const UserRoutes = require("./routes/UserRoutes.js");
+const DoctorRoutes = require("./routes/DoctorRoutes.js");
 const UserModel = require("./models/User");
-const {Sequelize} = require("sequelize");
+const { Sequelize } = require("sequelize");
 
 const app = express();
-app.set('view engine', 'ejs');
+app.set("view engine", "ejs");
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }))
-const port = 8080
+app.use(bodyParser.urlencoded({ extended: false }));
+const port = 8080;
 
 app.use(express.json());
 
 const sequelize = new Sequelize({
-    database: process.env.MYSQL_DATABASE,
-    username: process.env.MYSQL_USERNAME,
-    password: process.env.MYSQL_PASSWORD,
-    dialect: "mysql",
-    define: {
-        timestamps: false
-    }
-    },
-)
+  database: process.env.MYSQL_DATABASE,
+  username: process.env.MYSQL_USERNAME,
+  password: process.env.MYSQL_PASSWORD,
+  dialect: "mysql",
+  define: {
+    timestamps: false,
+  },
+});
 
 // Initialising the Models on sequelize
 UserModel.initialise(sequelize);
@@ -30,33 +30,34 @@ UserModel.initialise(sequelize);
 // Syncing the models that are defined on sequelize with the tables that already exists
 // in the database. It creates models as tables that do not exist in the DB.
 sequelize
-    .sync()
-    .then(() => {
-      console.log("Sequelize Initialised!!");
+  .sync()
+  .then(() => {
+    console.log("Sequelize Initialised!!");
 
-      // Attaching the Routes to the app.
-      app.use("/user", UserRoutes);
+    // Attaching the Routes to the app.
+    app.use("/user", UserRoutes);
+    app.use("/doctor", DoctorRoutes);
 
-      app.listen(port, () => {
-        console.log("Server Listening on PORT:", port);
-      });
-    })
-    .catch((err) => {
-      console.error("Sequelize Initialisation threw an error:", err);
+    app.listen(port, () => {
+      console.log("Server Listening on PORT:", port);
     });
+  })
+  .catch((err) => {
+    console.error("Sequelize Initialisation threw an error:", err);
+  });
 
-app.get('/', (req, res) => {
-    res.render("signup.ejs")
-})
-app.get('/status', (req, res) => {
-    const status = {
-        "Status": "Running"
-    };
-    res.send(status);
-})
-app.get('/login', (req, res) => {
-    res.render("login.ejs")
-})
+app.get("/", (req, res) => {
+  res.render("signup.ejs");
+});
+app.get("/status", (req, res) => {
+  const status = {
+    Status: "Running",
+  };
+  res.send(status);
+});
+app.get("/login", (req, res) => {
+  res.render("login.ejs");
+});
 
 app.use(express.static("public"));
 /*
