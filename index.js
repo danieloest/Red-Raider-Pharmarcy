@@ -24,7 +24,7 @@ const sequelize = new Sequelize({
     },
 )
 
-// Initialising the Model on sequelize
+// Initialising the Models on sequelize
 UserModel.initialise(sequelize);
 
 // Syncing the models that are defined on sequelize with the tables that already exists

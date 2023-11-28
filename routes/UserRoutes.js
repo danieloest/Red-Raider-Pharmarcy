@@ -1,5 +1,6 @@
 const express = require("express");
 const UserController = require("../controllers/UserController.js");
+const UserPermission = require("../middleware/UserPermission");
 const router = express.Router();
 
 router.get(
@@ -9,6 +10,7 @@ router.get(
 
 router.get(
     "/",
+    [UserPermission.checkPermission('admin')],
     UserController.getAllUsers
 );
 
@@ -19,6 +21,7 @@ router.patch(
 
 router.delete(
     "/:userId",
+    [UserPermission.checkPermission('admin')],
     UserController.deleteUser
 );
 
