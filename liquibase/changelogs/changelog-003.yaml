@@ -15,3 +15,43 @@ databaseChangeLog:
             path: liquibase/sql-scripts/user-inserts.sql
             relativeToPath: true
             dbms: 'mysql'
+  - changeSet:
+      id: add-insurance-data
+      author: RKeur
+      changes:
+        - sqlFile:
+            path: liquibase/sql-scripts/insurance-inserts.sql
+            relativeToPath: true
+            dbms: 'mysql'
+  - changeSet:
+      id: add-patient-data
+      author: RKeur
+      changes:
+        - sqlFile:
+            path: liquibase/sql-scripts/patient-inserts.sql
+            relativeToPath: true
+            dbms: 'mysql'
+  - changeSet:
+      id: add-prescription-data
+      author: RKeur
+      changes:
+        - sqlFile:
+            path: liquibase/sql-scripts/prescription-inserts.sql
+            relativeToPath: true
+            dbms: 'mysql'
+  - changeSet:
+      id: add-patient-doctor-data
+      author: RKeur
+      changes:
+        - sqlFile:
+            path: liquibase/sql-scripts/patient-doctor-inserts.sql
+            relativeToPath: true
+            dbms: 'mysql'
+  - changeSet:
+      id: add-patient-prescription-data
+      author: RKeur
+      changes:
+        - sqlFile:
+            path: liquibase/sql-scripts/patient-prescription-inserts.sql
+            relativeToPath: true
+            dbms: 'mysql'
