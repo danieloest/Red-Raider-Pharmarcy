@@ -4,10 +4,10 @@ databaseChangeLog:
       author: RKeur
       changes:
         - createTable:
-            tableName: Users
+            tableName: users
             columns:
               - column:
-                  name: Id
+                  name: id
                   type: BIGINT AUTO_INCREMENT
                   constraints:
                     nullable: false
