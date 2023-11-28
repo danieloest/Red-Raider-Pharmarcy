@@ -8,6 +8,6 @@ router.get("/", DoctorController.getAllDoctors);
 
 router.patch("/", DoctorController.updateDoctor);
 
-router.delete("/:userId", DoctorController.deleteDoctor);
+router.delete("/:doctorId", DoctorController.deleteDoctor);
 
 module.exports = router;
