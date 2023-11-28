@@ -4,32 +4,32 @@ databaseChangeLog:
       author: RKeur
       changes:
         - createTable:
-            tableName: Doctor
+            tableName: doctor
             columns:
               - column:
-                  name: DoctorId
+                  name: id
                   type: BIGINT AUTO_INCREMENT
                   constraints:
                     nullable: false
                     primaryKey: true
                     primaryKeyName: pk_doctor
               - column:
-                  name: FirstName
+                  name: firstName
                   type: varchar(50)
                   constraints:
                     nullable: false
               - column:
-                  name: LastName
+                  name: lastName
                   type: varchar(50)
                   constraints:
                     nullable: false
               - column:
-                  name: Email
+                  name: email
                   type: varchar(50)
                   constraints:
                     nullable: false
               - column:
-                  name: Address
+                  name: address
                   type: varchar(50)
                   constraints:
                     nullable: false
@@ -38,27 +38,27 @@ databaseChangeLog:
       author: RKeur
       changes:
         - createTable:
-            tableName: Insurance
+            tableName: insurance
             columns:
               - column:
-                  name: InsuranceId
+                  name: id
                   type: BIGINT AUTO_INCREMENT
                   constraints:
                     nullable: false
                     primaryKey: true
                     primaryKeyName: pk_insurance
               - column:
-                  name: Name
+                  name: name
                   type: varchar(50)
                   constraints:
                     nullable: false
               - column:
-                  name: Phone
+                  name: phone
                   type: varchar(12)
                   constraints:
                     nullable: false
               - column:
-                  name: Address
+                  name: address
                   type: varchar(50)
                   constraints:
                     nullable: false
@@ -67,47 +67,47 @@ databaseChangeLog:
       author: RKeur
       changes:
         - createTable:
-            tableName: Patient
+            tableName: patient
             columns:
               - column:
-                  name: PatientId
+                  name: id
                   type: BIGINT AUTO_INCREMENT
                   constraints:
                     nullable: false
                     primaryKey: true
                     primaryKeyName: pk_patient
               - column:
-                  name: FirstName
+                  name: firstName
                   type: varchar(50)
                   constraints:
                     nullable: false
               - column:
-                  name: LastName
+                  name: lastName
                   type: varchar(50)
                   constraints:
                     nullable: false
               - column:
-                  name: Email
+                  name: email
                   type: varchar(50)
                   constraints:
                     nullable: false
               - column:
-                  name: Phone
+                  name: phone
                   type: varchar(50)
                   constraints:
                     nullable: false
               - column:
-                  name: Address
+                  name: address
                   type: varchar(50)
                   constraints:
                     nullable: false
               - column:
-                  name: InsuranceCompanyId
+                  name: insuranceCompanyId
                   type: BIGINT
                   constraints:
                     foreignKeyName: fk_insurance_company
                     validateForeignKey: true
-                    references: Insurance(InsuranceId)
+                    references: insurance(id)
   - changeSet:
       id: add-patient-doctor-table
       author: RKeur
@@ -116,45 +116,46 @@ databaseChangeLog:
             tableName: PatientDoctor
             columns:
               - column:
-                  name: PatientId
+                  name: patientId
                   type: BIGINT
                   constraints:
                     foreignKeyName: fk_pat_doc_patient
                     validateForeignKey: true
-                    references: Patient(PatientId)
+                    references: patient(id)
               - column:
-                  name: DoctorId
+                  name: doctorId
                   type: BIGINT
                   constraints:
                     foreignKeyName: fk_pat_doc_doctor
                     validateForeignKey: true
-                    references: Doctor(DoctorId)
+                    references: doctor(id)
           addPrimaryKey:
-            tableName: PatientDoctor
+            tableName: patientDoctor
             validate: true
             constraintName: pk_patient_doctor
-            columnNames: PatientId, DoctorId
+            columnNames: patientId, doctorId
   - changeSet:
       id: add-prescription-table
       author: RKeur
       changes:
         - createTable:
-            tableName: Prescription
+            tableName: prescription
             columns:
               - column:
-                  name: PrescriptionId
+                  name: id
                   type: BIGINT AUTO_INCREMENT
                   constraints:
                     nullable: false
                     primaryKey: true
                     primaryKeyName: pk_prescription
               - column:
-                  name: Name
+                  name: name
                   type: varchar(50)
                   constraints:
                     nullable: false
+                    unique: true
               - column:
-                  name: Price
+                  name: price
                   type: DECIMAL(6,2)
                   constraints:
                     nullable: false
@@ -168,24 +169,29 @@ databaseChangeLog:
       author: RKeur
       changes:
         - createTable:
-            tableName: PatientPrescription
+            tableName: patientPrescription
             columns:
               - column:
-                  name: PatientId
+                  name: patientId
                   type: BIGINT
                   constraints:
                     foreignKeyName: fk_pat_pres_patient
                     validateForeignKey: true
-                    references: Patient(PatientId)
+                    references: patient(id)
               - column:
-                  name: PrescriptionId
+                  name: prescriptionId
                   type: BIGINT
                   constraints:
                     foreignKeyName: fk_pat_pres_prescription
                     validateForeignKey: true
-                    references: Prescription(PrescriptionId)
+                    references: prescription(id)
+              - column:
+                  name: datePrescribed
+                  type: DATETIME
+                  constraints:
+                    nullable: false
           addPrimaryKey:
-            tableName: PatientPrescription
+            tableName: patientPrescription
             validate: true
             constraintName: pk_patient_prescription
-            columnNames: PatientId, PrescriptionId
+            columnNames: patientId, prescriptionId
