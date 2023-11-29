@@ -5,6 +5,7 @@ const UserRoutes = require("./routes/UserRoutes.js");
 const PatientRoutes = require("./routes/PatientRoutes.js");
 const PatientModel = require("./models/Patient");
 const DoctorRoutes = require("./routes/DoctorRoutes.js");
+const UserModel = require("./models/User");
 const DoctorModel = require("./models/Doctor");
 const { Sequelize } = require("sequelize");
 
