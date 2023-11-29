@@ -1,16 +1,16 @@
-const UserModel = require("../models/User.js");
+const DoctorModel = require("../models/Doctor.js");
 
 module.exports = {
-  getUser: (req, res) => {
+  getDoctor: (req, res) => {
     const {
-      params: { userId },
+      params: { doctorId },
     } = req;
 
-    UserModel.findUser({ id: userId })
-      .then((user) => {
+    DoctorModel.findDoctor({ id: doctorId })
+      .then((doctor) => {
         return res.status(200).json({
           status: true,
-          data: user,
+          data: doctor,
         });
       })
       .catch((err) => {
@@ -21,9 +21,9 @@ module.exports = {
       });
   },
 
-  updateUser: (req, res) => {
+  updateDoctor: (req, res) => {
     const {
-      user: { userId },
+      doctor: { doctorId },
       body: payload,
     } = req;
 
@@ -33,19 +33,19 @@ module.exports = {
       return res.status(400).json({
         status: false,
         error: {
-          message: "Body is empty, hence can not update the user.",
+          message: "Body is empty, hence can not update the doctor.",
         },
       });
     }
 
-    UserModel.updateUser({ id: userId }, payload)
+    DoctorModel.updateDoctor({ id: doctorId }, payload)
       .then(() => {
-        return UserModel.findUser({ id: userId });
+        return DoctorModel.findDoctor({ id: doctorId });
       })
-      .then((user) => {
+      .then((doctor) => {
         return res.status(200).json({
           status: true,
-          data: user.toJSON(),
+          data: doctor.toJSON(),
         });
       })
       .catch((err) => {
@@ -56,17 +56,17 @@ module.exports = {
       });
   },
 
-  deleteUser: (req, res) => {
+  deleteDoctor: (req, res) => {
     const {
-      params: { userId },
+      params: { doctorId },
     } = req;
 
-    UserModel.deleteUser({ id: userId })
+    DoctorModel.deleteDoctor({ id: doctorId })
       .then((numberOfEntriesDeleted) => {
         return res.status(200).json({
           status: true,
           data: {
-            numberOfUsersDeleted: numberOfEntriesDeleted,
+            numberOfDoctorsDeleted: numberOfEntriesDeleted,
           },
         });
       })
@@ -78,12 +78,12 @@ module.exports = {
       });
   },
 
-  getAllUsers: (req, res) => {
-    UserModel.findAllUsers(req.query)
-      .then((users) => {
+  getAllDoctors: (req, res) => {
+    DoctorModel.findAllDoctors(req.query)
+      .then((doctors) => {
         return res.status(200).json({
           status: true,
-          data: users,
+          data: doctors,
         });
       })
       .catch((err) => {
