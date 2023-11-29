@@ -3,7 +3,6 @@ const bodyParser = require("body-parser");
 const { initLiquibase } = require("./database.js");
 const UserRoutes = require("./routes/UserRoutes.js");
 const PatientRoutes = require("./routes/PatientRoutes.js");
-const UserModel = require("./models/User");
 const PatientModel = require("./models/Patient");
 const DoctorRoutes = require("./routes/DoctorRoutes.js");
 const UserModel = require("./models/User");
