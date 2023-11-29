@@ -5,6 +5,9 @@ const UserRoutes = require("./routes/UserRoutes.js");
 const PatientRoutes = require("./routes/PatientRoutes.js");
 const UserModel = require("./models/User");
 const PatientModel = require("./models/Patient");
+const DoctorRoutes = require("./routes/DoctorRoutes.js");
+const UserModel = require("./models/User");
+const DoctorModel = require("./models/Doctor");
 const { Sequelize } = require("sequelize");
 
 const app = express();
@@ -28,6 +31,7 @@ const sequelize = new Sequelize({
 // Initialising the Models on sequelize
 UserModel.initialise(sequelize);
 PatientModel.initialise(sequelize);
+DoctorModel.initialise(sequelize);
 
 // Syncing the models that are defined on sequelize with the tables that already exists
 // in the database. It creates models as tables that do not exist in the DB.
@@ -39,6 +43,7 @@ sequelize
     // Attaching the Routes to the app.
     app.use("/user", UserRoutes);
     app.use("/patient", PatientRoutes);
+    app.use("/doctor", DoctorRoutes);
 
     app.listen(port, () => {
       console.log("Server Listening on PORT:", port);
