@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "6b3d9bbc-e88e-478d-a450-04640afa9273",
+		"_postman_id": "31d7b2c4-fc7b-4be3-9fd7-fbf606d9bf00",
 		"name": "Red Raider Pharmacy",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7945198"
 	},
 	"item": [
 		{
@@ -142,6 +143,62 @@
 		},
 		{
 			"name": "Insurance",
+			"item": [
+				{
+					"name": "All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{insuranceBaseUrl}}/",
+							"host": [
+								"{{insuranceBaseUrl}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "One",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{insuranceBaseUrl}}/{{insuranceId}}",
+							"host": [
+								"{{insuranceBaseUrl}}"
+							],
+							"path": [
+								"{{insuranceId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "One",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{insuranceBaseUrl}}/{{insuranceId}}",
+							"host": [
+								"{{insuranceBaseUrl}}"
+							],
+							"path": [
+								"{{insuranceId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Patients",
 			"item": [
 				{
 					"name": "All",

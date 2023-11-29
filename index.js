@@ -4,9 +4,11 @@ const { initLiquibase } = require("./database");
 const UserRoutes = require("./routes/UserRoutes");
 const DoctorRoutes = require("./routes/DoctorRoutes");
 const InsuranceRoutes = require("./routes/InsuranceRoutes")
+const PatientRoutes = require("./routes/PatientRoutes");
 const UserModel = require("./models/User");
 const DoctorModel = require("./models/Doctor");
 const InsuranceModel = require("./models/Insurance");
+const PatientModel = require("./models/Patient");
 const { Sequelize } = require("sequelize");
 
 const app = express();
@@ -31,6 +33,7 @@ const sequelize = new Sequelize({
 UserModel.initialise(sequelize);
 DoctorModel.initialise(sequelize);
 InsuranceModel.initialise(sequelize);
+PatientModel.initialise(sequelize);
 
 // Syncing the models that are defined on sequelize with the tables that already exists
 // in the database. It creates models as tables that do not exist in the DB.
@@ -43,6 +46,7 @@ sequelize
     app.use("/user", UserRoutes);
     app.use("/doctor", DoctorRoutes);
     app.use("/insurance", InsuranceRoutes);
+    app.use("/patient", PatientRoutes);
 
     app.listen(port, () => {
       console.log("Server Listening on PORT:", port);
