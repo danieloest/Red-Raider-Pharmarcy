@@ -6,24 +6,6 @@ const PatientModel = {
     autoIncrement: true,
     primaryKey: true,
   },
-  patientname: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    unique: true,
-  },
-  email: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    unique: true,
-  },
-  password: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  age: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
   firstName: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -32,11 +14,27 @@ const PatientModel = {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  email: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+  },
+  email: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  phone: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
 };
 
 module.exports = {
   initialise: (sequelize) => {
-    this.model = sequelize.define("patient", PatientModel);
+    this.model = sequelize.define("patient", PatientModel, {
+      freezeTabkeName: true,
+      tableName: "patient",
+    });
   },
 
   createPatient: (patient) => {
