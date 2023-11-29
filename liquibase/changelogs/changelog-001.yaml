@@ -101,13 +101,13 @@ databaseChangeLog:
                   type: varchar(50)
                   constraints:
                     nullable: false
-#              - column:
-#                  name: insuranceCompanyId
-#                  type: BIGINT
-#                  constraints:
-#                    foreignKeyName: fk_insurance_company
-#                    validateForeignKey: true
-#                    references: insurance(id)
+              - column:
+                  name: insuranceCompanyId
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_insurance_company
+                    validateForeignKey: true
+                    references: insurance(id)
   - changeSet:
       id: add-patient-doctor-table
       author: RKeur
