@@ -1,4 +1,5 @@
-const {DataTypes} = require("sequelize");
+const DataTypes = require("sequelize");
+
 const InsuranceModel = {
     id: {
         type: DataTypes.INTEGER,
@@ -22,8 +23,12 @@ const InsuranceModel = {
 
 module.exports = {
     initialise: (sequelize) => {
-        this.model = sequelize.define("insurance", InsuranceModel);
+        this.model = sequelize.define("insurance", InsuranceModel,
+            {freezeTableName: true,
+            tableName: "insurance",
+            });
     },
+
     createInsurance: (insurance) => {
         return this.model.create(insurance);
     },

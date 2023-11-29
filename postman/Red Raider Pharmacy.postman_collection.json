@@ -1,307 +1,388 @@
 {
-"info": {
-	"_postman_id": "6b3d9bbc-e88e-478d-a450-04640afa9273",
-	"name": "Red Raider Pharmacy",
-	"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-},
-"item": [
-	{
-		"name": "Users",
-		"item": [
-			{
-				"name": "All",
-				"request": {
-					"method": "GET",
-					"header": [],
-					"url": {
-						"raw": "http://localhost:8080/user/",
-						"protocol": "http",
-						"host": [
-							"localhost"
-						],
-						"port": "8080",
-						"path": [
-							"user",
+	"info": {
+		"_postman_id": "6b3d9bbc-e88e-478d-a450-04640afa9273",
+		"name": "Red Raider Pharmacy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{userBaseUrl}}/",
+							"host": [
+								"{{userBaseUrl}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "One",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{userBaseUrl}}/{{userId}}",
+							"host": [
+								"{{userBaseUrl}}"
+							],
+							"path": [
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "One",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{userBaseUrl}}/{{userId}}",
+							"host": [
+								"{{userBaseUrl}}"
+							],
+							"path": [
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
 							""
 						]
 					}
 				},
-				"response": []
-			},
-			{
-				"name": "User",
-				"request": {
-					"method": "GET",
-					"header": [],
-					"url": {
-						"raw": "http://localhost:8080/user/{{userId}}",
-						"protocol": "http",
-						"host": [
-							"localhost"
-						],
-						"port": "8080",
-						"path": [
-							"user",
-							"{{userId}}"
-						]
-					}
-				},
-				"response": []
-			},
-			{
-				"name": "User",
-				"request": {
-					"method": "DELETE",
-					"header": [],
-					"url": {
-						"raw": "http://localhost:8080/user/{{userId}}",
-						"protocol": "http",
-						"host": [
-							"localhost"
-						],
-						"port": "8080",
-						"path": [
-							"user",
-							"{{userId}}"
-						]
-					}
-				},
-				"response": []
-			}
-		],
-		"event": [
-			{
-				"listen": "prerequest",
-				"script": {
-					"type": "text/javascript",
-					"exec": [
-						"pm.request.headers.add({",
-						"  key: \"userId\",",
-						"  value: \"{{userId}}\"",
-						"});"
-					]
-				}
-			},
-			{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": [
-						""
-					]
-				}
-			}
-		]
-	},
-	{
-		"name": "Doctors",
-		"item": [
-			{
-				"name": "All",
-				"request": {
-					"method": "GET",
-					"header": [],
-					"url": {
-						"raw": "http://localhost:8080/doctor/",
-						"protocol": "http",
-						"host": [
-							"localhost"
-						],
-						"port": "8080",
-						"path": [
-							"doctor",
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
 							""
 						]
 					}
+				}
+			]
+		},
+		{
+			"name": "Doctors",
+			"item": [
+				{
+					"name": "All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{doctorBaseUrl}}/",
+							"host": [
+								"{{doctorBaseUrl}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
 				},
-				"response": []
+				{
+					"name": "One",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/doctor/{{doctorId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"doctor",
+								"{{doctorId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "One",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{doctorBaseUrl}}/{{doctorId}}",
+							"host": [
+								"{{doctorBaseUrl}}"
+							],
+							"path": [
+								"{{doctorId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Insurance",
+			"item": [
+				{
+					"name": "All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{insuranceBaseUrl}}/",
+							"host": [
+								"{{insuranceBaseUrl}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "One",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{insuranceBaseUrl}}/{{insuranceId}}",
+							"host": [
+								"{{insuranceBaseUrl}}"
+							],
+							"path": [
+								"{{insuranceId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "One",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{insuranceBaseUrl}}/{{insuranceId}}",
+							"host": [
+								"{{insuranceBaseUrl}}"
+							],
+							"path": [
+								"{{insuranceId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Doctors",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/doctors",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"doctors"
+					]
+				}
 			},
-			{
-				"name": "Doctor",
-				"request": {
-					"method": "GET",
-					"header": [],
-					"url": {
-						"raw": "http://localhost:8080/doctor/{{doctorId}}",
-						"protocol": "http",
-						"host": [
-							"localhost"
-						],
-						"port": "8080",
-						"path": [
-							"doctor",
-							"{{doctorId}}"
-						]
-					}
-				},
-				"response": []
+			"response": []
+		},
+		{
+			"name": "Status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/status",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"status"
+					]
+				}
 			},
-			{
-				"name": "Doctor",
-				"request": {
-					"method": "DELETE",
-					"header": [],
-					"url": {
-						"raw": "http://localhost:8080/doctor/{{doctorId}}",
-						"protocol": "http",
-						"host": [
-							"localhost"
-						],
-						"port": "8080",
-						"path": [
-							"doctor",
-							"{{doctorId}}"
-						]
-					}
-				},
-				"response": []
-			}
-		]
-	},
-	{
-		"name": "Doctors",
-		"request": {
-			"method": "GET",
-			"header": [],
-			"url": {
-				"raw": "http://localhost:8080/doctors",
-				"protocol": "http",
-				"host": [
-					"localhost"
-				],
-				"port": "8080",
-				"path": [
-					"doctors"
+			"response": []
+		},
+		{
+			"name": "Patients",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/patients",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"patients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Prescriptions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/prescriptions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"prescriptions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patient Prescriptions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/patient/prescriptions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"patient",
+						"prescriptions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patient Doctors",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/patient/doctors",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"patient",
+						"doctors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Insurance",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/insurance",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"insurance"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.request.headers.add({",
+					"  key: \"userId\",",
+					"  value: \"{{userId}}\"",
+					"});"
 				]
 			}
 		},
-		"response": []
-	},
-	{
-		"name": "Status",
-		"request": {
-			"method": "GET",
-			"header": [],
-			"url": {
-				"raw": "http://localhost:8080/status",
-				"protocol": "http",
-				"host": [
-					"localhost"
-				],
-				"port": "8080",
-				"path": [
-					"status"
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
 				]
 			}
+		}
+	],
+	"variable": [
+		{
+			"key": "userBaseUrl",
+			"value": "http://localhost:8080/user",
+			"type": "default"
 		},
-		"response": []
-	},
-	{
-		"name": "Patients",
-		"request": {
-			"method": "GET",
-			"header": [],
-			"url": {
-				"raw": "http://localhost:8080/patients",
-				"protocol": "http",
-				"host": [
-					"localhost"
-				],
-				"port": "8080",
-				"path": [
-					"patients"
-				]
-			}
+		{
+			"key": "userId",
+			"value": "1"
 		},
-		"response": []
-	},
-	{
-		"name": "Prescriptions",
-		"request": {
-			"method": "GET",
-			"header": [],
-			"url": {
-				"raw": "http://localhost:8080/prescriptions",
-				"protocol": "http",
-				"host": [
-					"localhost"
-				],
-				"port": "8080",
-				"path": [
-					"prescriptions"
-				]
-			}
+		{
+			"key": "doctorBaseUrl",
+			"value": "http://localhost:8080/doctor",
+			"type": "default"
 		},
-		"response": []
-	},
-	{
-		"name": "Patient Prescriptions",
-		"request": {
-			"method": "GET",
-			"header": [],
-			"url": {
-				"raw": "http://localhost:8080/patient/prescriptions",
-				"protocol": "http",
-				"host": [
-					"localhost"
-				],
-				"port": "8080",
-				"path": [
-					"patient",
-					"prescriptions"
-				]
-			}
+		{
+			"key": "doctorId",
+			"value": "1"
 		},
-		"response": []
-	},
-	{
-		"name": "Patient Doctors",
-		"request": {
-			"method": "GET",
-			"header": [],
-			"url": {
-				"raw": "http://localhost:8080/patient/doctors",
-				"protocol": "http",
-				"host": [
-					"localhost"
-				],
-				"port": "8080",
-				"path": [
-					"patient",
-					"doctors"
-				]
-			}
+		{
+			"key": "insuranceBaseUrl",
+			"value": "http://localhost:8080/insurance",
+			"type": "default"
 		},
-		"response": []
-	},
-	{
-		"name": "Insurance",
-		"request": {
-			"method": "GET",
-			"header": [],
-			"url": {
-				"raw": "http://localhost:8080/insurance",
-				"protocol": "http",
-				"host": [
-					"localhost"
-				],
-				"port": "8080",
-				"path": [
-					"insurance"
-				]
-			}
-		},
-		"response": []
-	}
-],
-"variable": [
-	{
-		"key": "userId",
-		"value": "1"
-	},
-	{
-		"key": "doctorId",
-		"value": "1"
-	}
-]
+		{
+			"key": "insuranceId",
+			"value": "1",
+			"type": "default"
+		}
+	]
 }

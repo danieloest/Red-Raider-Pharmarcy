@@ -41,7 +41,10 @@ const UserModel = {
 
 module.exports = {
     initialise: (sequelize) => {
-        this.model = sequelize.define("user", UserModel);
+        this.model = sequelize.define("user", UserModel,
+            {freezeTableName: true,
+            tableName: "user",
+            });
     },
 
     createUser: (user) => {
