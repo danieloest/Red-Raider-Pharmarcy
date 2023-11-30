@@ -19,10 +19,6 @@ const PatientModel = {
     allowNull: false,
     unique: true,
   },
-  email: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
   phone: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -32,10 +28,17 @@ const PatientModel = {
 module.exports = {
   initialise: (sequelize) => {
     this.model = sequelize.define("patient", PatientModel, {
-      freezeTabkeName: true,
+      defaultScope: {
+        include: [{
+          as: "insurance",
+          model: sequelize.model("insurance"),
+        }]
+      },
+      freezeTableName: true,
       tableName: "patient",
     });
-  },
+    this.model.belongsTo(sequelize.model("insurance"));
+    },
 
   createPatient: (patient) => {
     return this.model.create(patient);

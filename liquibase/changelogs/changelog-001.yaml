@@ -102,7 +102,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: insuranceCompanyId
+                  name: insuranceId
                   type: BIGINT
                   constraints:
                     foreignKeyName: fk_insurance_company

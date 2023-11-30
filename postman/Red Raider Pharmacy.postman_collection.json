@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "31d7b2c4-fc7b-4be3-9fd7-fbf606d9bf00",
+		"_postman_id": "b89e59fc-6071-4897-8039-5ac728c8e9a8",
 		"name": "Red Raider Pharmacy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "7945198"
+		"_exporter_id": "24838144"
 	},
 	"item": [
 		{
@@ -206,9 +206,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{insuranceBaseUrl}}/",
+							"raw": "{{patientBaseUrl}}/",
 							"host": [
-								"{{insuranceBaseUrl}}"
+								"{{patientBaseUrl}}"
 							],
 							"path": [
 								""
@@ -223,12 +223,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{insuranceBaseUrl}}/{{insuranceId}}",
+							"raw": "{{patientBaseUrl}}/{{patientId}}",
 							"host": [
-								"{{insuranceBaseUrl}}"
+								"{{patientBaseUrl}}"
 							],
 							"path": [
-								"{{insuranceId}}"
+								"{{patientId}}"
 							]
 						}
 					},
@@ -440,6 +440,16 @@
 			"key": "insuranceId",
 			"value": "1",
 			"type": "default"
+		},
+		{
+			"key": "patientBaseUrl",
+			"value": "http://localhost:8080/patient",
+			"type": "string"
+		},
+		{
+			"key": "patientId",
+			"value": "1",
+			"type": "string"
 		}
 	]
 }
