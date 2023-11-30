@@ -1,4 +1,4 @@
-INSERT INTO pharmacy.patient (firstName, lastName, email, phone, address, insuranceCompanyId) VALUES
+INSERT INTO pharmacy.patient (firstName, lastName, email, phone, address, insuranceId) VALUES
 ('John', 'Doe', 'john.doe@email.com', '555-123-4567', '123 Main St', 1),
 ('Jane', 'Smith', 'jane.smith@email.com', '555-987-6543', '456 Oak St', 1),
 ('Bob', 'Johnson', 'bob.johnson@email.com', '555-234-5678', '789 Maple Ave', 1),
