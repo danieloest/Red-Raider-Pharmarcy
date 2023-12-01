@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 const { initLiquibase } = require("./database");
 const UserRoutes = require("./routes/UserRoutes");
 const DoctorRoutes = require("./routes/DoctorRoutes");
-const InsuranceRoutes = require("./routes/InsuranceRoutes")
+const InsuranceRoutes = require("./routes/InsuranceRoutes");
 const PatientRoutes = require("./routes/PatientRoutes");
 const UserModel = require("./models/User");
 const DoctorModel = require("./models/Doctor");
@@ -67,6 +67,13 @@ app.get("/status", (req, res) => {
 });
 app.get("/login", (req, res) => {
   res.render("login.ejs");
+});
+
+app.get("/patients", (req, res) => {
+  res.render("patients.ejs");
+});
+app.get("/createPatient", (req, res) => {
+  res.render("createPatient.ejs");
 });
 
 app.use(express.static("public"));
