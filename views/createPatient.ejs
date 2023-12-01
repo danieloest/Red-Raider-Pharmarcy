@@ -179,7 +179,12 @@
                 <label for="insurance" class="form-label">Insurance</label>
                 <select class="form-select" id="insurance" required>
                   <option value="">Choose...</option>
-                  <option>Texas</option>
+                  <% console.log("Insurance in ejs") %> <%
+                  insurances.forEach((insurance) =>
+                  console.log(insurance.dataValues)) %> <%
+                  insurances.forEach(insurance => { %>
+                  <option value="<%=insurance.id%>"><%=insurance.name%></option>
+                  <% }) %>
                 </select>
                 <div class="invalid-feedback">
                   Please provide a valid state.
