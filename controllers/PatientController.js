@@ -24,7 +24,24 @@ module.exports = {
   createPatient: (req, res) => {
     console.log("request in controller");
     console.log(req.body.firstName);
-    PatientModel.createPatient(req.query)
+    console.log("req.query");
+    console.log(req.query);
+    // If the request comes from the website
+    if (Object.keys(req.query).length === 0) {
+      newPatient = {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        phone: req.body.phone,
+        address: req.body.address,
+        insuranceId: req.body.insuranceId,
+      };
+    }
+    // If the command comes from Postman
+    else {
+      newPatient = req.query;
+    }
+    PatientModel.createPatient(newPatient)
       .then((patient) => {
         return res.status(200).json({
           status: true,
