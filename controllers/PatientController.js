@@ -22,6 +22,8 @@ module.exports = {
   },
 
   createPatient: (req, res) => {
+    console.log("request in controller");
+    console.log(req.body.firstName);
     PatientModel.createPatient(req.query)
       .then((patient) => {
         return res.status(200).json({
