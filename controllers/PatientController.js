@@ -6,7 +6,7 @@ module.exports = {
       params: { patientId },
     } = req;
 
-    PatientModel.findPatient({ id: patientId } )
+    PatientModel.findPatient({ id: patientId })
       .then((patient) => {
         return res.status(200).json({
           status: true,
@@ -23,18 +23,18 @@ module.exports = {
 
   createPatient: (req, res) => {
     PatientModel.createPatient(req.query)
-        .then((patient) => {
-          return res.status(200).json({
-            status: true,
-            data: patient.toJSON(),
-          });
-        })
-        .catch((err) => {
-          return res.status(500).json({
-            status: false,
-            error: err,
-          });
+      .then((patient) => {
+        return res.status(200).json({
+          status: true,
+          data: patient.toJSON(),
         });
+      })
+      .catch((err) => {
+        return res.status(500).json({
+          status: false,
+          error: err,
+        });
+      });
   },
 
   updatePatient: (req, res) => {
