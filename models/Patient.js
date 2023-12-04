@@ -59,6 +59,7 @@ module.exports = {
       email: patient.email,
       phone: patient.phone,
       address: patient.address,
+      insuranceId: parseInt(patient.insuranceId),
     });
   },
 
