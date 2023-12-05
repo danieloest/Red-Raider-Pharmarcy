@@ -18,6 +18,24 @@
 
     <!-- Bootstrap core CSS -->
     <link href="/bootstrap.min.css" rel="stylesheet" />
+    <script>
+      function validate() {
+        let firstName = document.getElementById("firstName").value;
+        let lastName = document.getElementById("lastName").value;
+        let email = document.getElementById("email").value;
+        let phone = document.getElementById("phone").value;
+        let address = document.getElementById("address").value;
+        let insurance = document.getElementById("insurance").value;
+        let submitButton = document.getElementById("submitButton")
+        if (firstName !== "" && firstName !== undefined && lastName !== "" && lastName !== undefined && email !== "" && email !== undefined && address !== "" && address !== undefined && insurance !== "" && insurance !== undefined) {
+          console.log("good to submit!")
+          submitButton.disabled = false
+        } else {
+          submitButton.disabled = true;
+        }
+
+      }
+    </script>
 
     <style>
       .bd-placeholder-img {
@@ -34,6 +52,7 @@
         }
       }
     </style>
+
 
     <!-- Custom styles for this template -->
     <link href="form-validation.css" rel="stylesheet" />
@@ -61,6 +80,7 @@
               action="/patient/createPatient"
               method="POST"
               id="createPatientForm"
+              onchange="validate()"
             >
               <div class="row g-3">
                 <div class="col-sm-6">
@@ -82,13 +102,13 @@
                 <div class="col-sm-6">
                   <label for="lastName" class="form-label">Last name</label>
                   <input
+                    required
                     type="text"
                     class="form-control"
                     id="lastName"
                     name="lastName"
                     placeholder=""
                     value=""
-                    required
                   />
                   <div class="invalid-feedback">
                     Valid last name is required.
@@ -209,7 +229,7 @@
 
               <hr class="my-4" />
 
-              <button class="w-100 btn btn-primary btn-lg" type="submit">
+              <button class="w-100 btn btn-primary btn-lg" type="submit" id="submitButton" disabled>
                 Create Patient
               </button>
             </form>
