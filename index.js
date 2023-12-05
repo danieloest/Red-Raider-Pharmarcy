@@ -83,6 +83,10 @@ app.get("/newPatientConfirmation", (req, res) => {
   res.render("newPatientConfirmation.ejs");
 });
 
+app.get("/errorPage", (req, res) => {
+  res.render("errorPage.ejs", { errorMessage: "" });
+});
+
 app.use(express.static("public"));
 /*
 
