@@ -60,10 +60,23 @@ module.exports = {
         }
       })
       .catch((err) => {
-        return res.status(500).json({
-          status: false,
-          error: err,
-        });
+        // return res.status(500).json({
+        //   status: false,
+        //   error: err,
+        // });
+        // For website
+        if (Object.keys(req.query).length === 0) {
+          return res.render("errorPage.ejs", {
+            errorMessage: "There was an error creating the patient.",
+          });
+        }
+        // For Postman
+        else {
+          return res.status(500).json({
+            status: false,
+            error: err,
+          });
+        }
       });
   },
 
