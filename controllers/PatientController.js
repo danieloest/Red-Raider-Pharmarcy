@@ -1,4 +1,6 @@
 const PatientModel = require("../models/Patient");
+// Used to get the name of the patient's insurance to send in the Create Patient response
+const InsuranceModel = require("../models/Insurance");
 
 module.exports = {
   getPatient: (req, res) => {
@@ -22,10 +24,6 @@ module.exports = {
   },
 
   createPatient: (req, res) => {
-    console.log("request in controller");
-    console.log(req.body.firstName);
-    console.log("req.query");
-    console.log(req.query);
     // If the request comes from the website
     if (Object.keys(req.query).length === 0) {
       newPatient = {
@@ -44,10 +42,14 @@ module.exports = {
     PatientModel.createPatient(newPatient)
       .then((patient) => {
         // For website
-        console.log("Response patient:");
-        console.log(patient);
         if (Object.keys(req.query).length === 0) {
-          return res.render("newPatientConfirmation.ejs", { patient });
+          var insurances_promise = InsuranceModel.findInsurance(
+            patient.dataValues.insuranceId
+          );
+          insurances_promise.then((insurances) => {
+            patient.dataValues.insurance = insurances.dataValues.name;
+            return res.render("newPatientConfirmation.ejs", { patient });
+          });
         }
         // For Postman
         else {

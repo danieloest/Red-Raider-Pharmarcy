@@ -34,7 +34,6 @@
                             'long'}); %> <%= new Date().getDate() %>,<%= new
                             Date().getFullYear(); %></span
                           >
-                          <% console.log(patient.dataValues) %>
                         </div>
                       </td>
                     </tr>
@@ -93,16 +92,16 @@
                       </tr>
 
                     <!-- patient's insurance -->
-                    <!-- <tr>
+                    <tr>
                         <td width="60%">
                           <span class="font-weight-bold">Patient's insurance</span>
                         </td>
                         <td width="20%">
                           <div class="text-right">
-                            <span class="font-weight-bold"><%= patient.dataValues.insuranceId %></span>
+                            <span class="font-weight-bold"><%= patient.dataValues.insurance %></span>
                           </div>
                         </td>
-                      </tr> -->
+                      </tr>
 <!-- 
                     <tr>
                       <td width="60%">
