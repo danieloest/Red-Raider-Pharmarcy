@@ -84,7 +84,7 @@ app.get("/newPatientConfirmation", (req, res) => {
 });
 
 app.get("/errorPage", (req, res) => {
-  res.render("errorPage.ejs", { errorMessage: "" });
+  res.render("errorPage.ejs", { errorMessage: "An unkown error has occured." });
 });
 
 app.use(express.static("public"));
