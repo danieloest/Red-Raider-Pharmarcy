@@ -75,13 +75,12 @@ app.get("/patients", (req, res) => {
 app.get("/createPatient", (req, res) => {
   var insurances_promise = InsuranceModel.findAllInsurances();
   insurances_promise.then((insurances) => {
-    // console.log("Getting insurances for create patients page in promise");
-    // console.log(insurances);
     res.render("createPatient.ejs", { insurances });
   });
-  // console.log("Getting insurances for create patients page");
-  // console.log(insurances);
-  // res.render("createPatient.ejs");
+});
+
+app.get("/newPatientConfirmation", (req, res) => {
+  res.render("newPatientConfirmation.ejs");
 });
 
 app.use(express.static("public"));

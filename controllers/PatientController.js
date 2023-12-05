@@ -43,10 +43,19 @@ module.exports = {
     }
     PatientModel.createPatient(newPatient)
       .then((patient) => {
-        return res.status(200).json({
-          status: true,
-          data: patient.toJSON(),
-        });
+        // For website
+        console.log("Response patient:");
+        console.log(patient);
+        if (Object.keys(req.query).length === 0) {
+          return res.render("newPatientConfirmation.ejs", { patient });
+        }
+        // For Postman
+        else {
+          return res.status(200).json({
+            status: true,
+            data: patient.toJSON(),
+          });
+        }
       })
       .catch((err) => {
         return res.status(500).json({

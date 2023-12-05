@@ -198,10 +198,7 @@
                   required
                 >
                   <option value="">Choose...</option>
-                  <% console.log("Insurance in ejs") %> <%
-                  insurances.forEach((insurance) =>
-                  console.log(insurance.dataValues)) %> <%
-                  insurances.forEach(insurance => { %>
+                   <% insurances.forEach(insurance => { %>
                   <option value="<%=insurance.id%>"><%=insurance.name%></option>
                   <% }) %>
                 </select>
