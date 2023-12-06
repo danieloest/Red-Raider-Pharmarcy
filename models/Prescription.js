@@ -1,4 +1,4 @@
-import {DataTypes} from "sequelize";
+const DataTypes = require("sequelize");
 
 const PrescriptionModel = {
     id: {
@@ -23,8 +23,11 @@ const PrescriptionModel = {
 
 module.exports = {
     initialise: (sequelize) => {
-        this.model = sequelize.define("prescription", PrescriptionModel);
-    },
+        this.model = sequelize.define("prescription", PrescriptionModel, {
+                freezeTableName: true,
+                tableName: "prescription",
+            });
+        },
 
     createPrescription: (prescription) => {
         return this.model.create(prescription);

@@ -24,8 +24,9 @@ const InsuranceModel = {
 module.exports = {
     initialise: (sequelize) => {
         this.model = sequelize.define("insurance", InsuranceModel,
-            {freezeTableName: true,
-            tableName: "insurance",
+            {
+                freezeTableName: true,
+                tableName: "insurance",
             });
     },
 

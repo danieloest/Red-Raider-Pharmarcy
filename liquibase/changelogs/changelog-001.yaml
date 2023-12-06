@@ -113,7 +113,7 @@ databaseChangeLog:
       author: RKeur
       changes:
         - createTable:
-            tableName: PatientDoctor
+            tableName: Patient_doctor
             columns:
               - column:
                   name: patientId
@@ -130,7 +130,7 @@ databaseChangeLog:
                     validateForeignKey: true
                     references: doctor(id)
           addPrimaryKey:
-            tableName: patientDoctor
+            tableName: patient_doctor
             validate: true
             constraintName: pk_patient_doctor
             columnNames: patientId, doctorId
@@ -169,7 +169,7 @@ databaseChangeLog:
       author: RKeur
       changes:
         - createTable:
-            tableName: patientPrescription
+            tableName: patient_prescription
             columns:
               - column:
                   name: patientId
@@ -191,7 +191,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
           addPrimaryKey:
-            tableName: patientPrescription
+            tableName: patient_prescription
             validate: true
             constraintName: pk_patient_prescription
             columnNames: patientId, prescriptionId
