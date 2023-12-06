@@ -142,6 +142,65 @@
 			]
 		},
 		{
+			"name": "Prescriptions",
+			"item": [
+				{
+					"name": "All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{prescriptionBaseUrl}}/",
+							"host": [
+								"{{prescriptionBaseUrl}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "One",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/doctor/{{doctorId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"doctor",
+								"{{doctorId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "One",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{doctorBaseUrl}}/{{doctorId}}",
+							"host": [
+								"{{doctorBaseUrl}}"
+							],
+							"path": [
+								"{{doctorId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Insurance",
 			"item": [
 				{
@@ -254,25 +313,6 @@
 			]
 		},
 		{
-			"name": "Doctors",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/doctors",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"doctors"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Status",
 			"request": {
 				"method": "GET",
@@ -286,44 +326,6 @@
 					"port": "8080",
 					"path": [
 						"status"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Patients",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/patients",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"patients"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Prescriptions",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/prescriptions",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"prescriptions"
 					]
 				}
 			},
@@ -364,25 +366,6 @@
 					"path": [
 						"patient",
 						"doctors"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Insurance",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/insurance",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"insurance"
 					]
 				}
 			},
@@ -448,6 +431,16 @@
 		},
 		{
 			"key": "patientId",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "prescriptionBaseUrl",
+			"value": "http://localhost:8080/prescription",
+			"type": "string"
+		},
+		{
+			"key": "prescriptionId",
 			"value": "1",
 			"type": "string"
 		}

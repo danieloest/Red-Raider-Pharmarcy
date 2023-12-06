@@ -3,11 +3,13 @@ const bodyParser = require("body-parser");
 const { initLiquibase } = require("./database");
 const UserRoutes = require("./routes/UserRoutes");
 const DoctorRoutes = require("./routes/DoctorRoutes");
-const InsuranceRoutes = require("./routes/InsuranceRoutes")
+const InsuranceRoutes = require("./routes/InsuranceRoutes");
+const PrescriptionRoutes = require("./routes/PrescriptionRoutes");
 const PatientRoutes = require("./routes/PatientRoutes");
 const UserModel = require("./models/User");
 const DoctorModel = require("./models/Doctor");
 const InsuranceModel = require("./models/Insurance");
+const PrescriptionModel = require("./models/Prescription");
 const PatientModel = require("./models/Patient");
 const { Sequelize } = require("sequelize");
 
@@ -33,6 +35,7 @@ const sequelize = new Sequelize({
 UserModel.initialise(sequelize);
 DoctorModel.initialise(sequelize);
 InsuranceModel.initialise(sequelize);
+PrescriptionModel.initialise(sequelize);
 PatientModel.initialise(sequelize);
 
 // Syncing the models that are defined on sequelize with the tables that already exists
@@ -46,6 +49,7 @@ sequelize
     app.use("/user", UserRoutes);
     app.use("/doctor", DoctorRoutes);
     app.use("/insurance", InsuranceRoutes);
+    app.use("/prescription", PrescriptionRoutes);
     app.use("/patient", PatientRoutes);
 
     app.listen(port, () => {

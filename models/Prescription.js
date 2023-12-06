@@ -1,6 +1,6 @@
 const DataTypes = require("sequelize");
 
-const InsuranceModel = {
+const PrescriptionModel = {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -11,50 +11,50 @@ const InsuranceModel = {
         allowNull: false,
         unique: true,
     },
-    phone: {
-        type: DataTypes.STRING,
+    price: {
+        type: DataTypes.DECIMAL,
         allowNull: false,
     },
-    address: {
-        type: DataTypes.STRING,
-        allowNull: false
+    "MaxDosage (mg)": {
+        type: DataTypes.DECIMAL,
+        allowNull: false,
     },
 }
 
 module.exports = {
     initialise: (sequelize) => {
-        this.model = sequelize.define("insurance", InsuranceModel,
-            {
+        this.model = sequelize.define("prescription", PrescriptionModel, {
                 freezeTableName: true,
-                tableName: "insurance",
+                tableName: "prescription",
             });
+        },
+
+    createPrescription: (prescription) => {
+        return this.model.create(prescription);
     },
 
-    createInsurance: (insurance) => {
-        return this.model.create(insurance);
-    },
-
-    findInsurance: (query) => {
+    findPrescription: (query) => {
         return this.model.findOne({
             where: query,
         });
     },
 
-    updateInsurance: (query, updatedValue) => {
+    updatePrescription: (query, updatedValue) => {
         return this.model.update(updatedValue, {
             where: query,
         });
     },
 
-    findAllInsurances: (query) => {
+    findAllPrescriptions: (query) => {
         return this.model.findAll({
             where: query
         });
     },
 
-    deleteInsurance: (query) => {
+    deletePrescription: (query) => {
         return this.model.destroy({
             where: query
         });
     }
-};
+    
+}

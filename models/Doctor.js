@@ -28,10 +28,11 @@ const DoctorModel = {
 
 module.exports = {
   initialise: (sequelize) => {
-    this.model = sequelize.define("doctor", DoctorModel, {
-      freezeTableName: true,
-      tableName: "doctor",
-    });
+    this.model = sequelize.define("doctor", DoctorModel,
+        {
+          freezeTableName: true,
+          tableName: "doctor",
+        });
   },
 
   createDoctor: (doctor) => {

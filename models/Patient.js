@@ -29,15 +29,21 @@ module.exports = {
   initialise: (sequelize) => {
     this.model = sequelize.define("patient", PatientModel, {
       defaultScope: {
-        include: [{
-          as: "insurance",
-          model: sequelize.model("insurance"),
-        }]
+        include: [
+            {
+              as: "insurance",
+              model: sequelize.model("insurance"),
+          }]
       },
       freezeTableName: true,
       tableName: "patient",
     });
     this.model.belongsTo(sequelize.model("insurance"));
+    this.model.belongsToMany(sequelize.model("prescription"), {
+      through: 'patient_prescription',
+      foreignKey: 'patientId',
+      as: 'prescriptions',
+    });
     },
 
   createPatient: (patient) => {

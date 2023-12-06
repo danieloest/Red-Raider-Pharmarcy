@@ -1,4 +1,4 @@
-INSERT INTO pharmacy.patientDoctor (patientId, doctorId) VALUES
+INSERT INTO pharmacy.patient_doctor (patientId, doctorId) VALUES
 (1, 1),
 (1, 2),
 (2, 3),
