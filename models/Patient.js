@@ -1,4 +1,5 @@
 const DataTypes = require("sequelize");
+const { Op } = require("sequelize");
 
 const PatientModel = {
   id: {
@@ -76,8 +77,26 @@ module.exports = {
   },
 
   findAllPatients: (query) => {
+    // Request from Postman
+    if (Object.keys(query).length === 0) {
+      return this.model.findAll({
+        where: query,
+      });
+    }
+    console.log("query in model: ");
+    console.log(query);
+    // Request from site
     return this.model.findAll({
-      where: query,
+      // where: query,
+      where: {
+        [Op.or]: [
+          { firstName: { [Op.like]: "%" + query.searchTerm + "%" } },
+          { lastName: { [Op.like]: "%" + query.searchTerm + "%" } },
+          { email: { [Op.like]: "%" + query.searchTerm + "%" } },
+          { phone: { [Op.like]: "%" + query.searchTerm + "%" } },
+          { address: { [Op.like]: "%" + query.searchTerm + "%" } },
+        ],
+      },
     });
   },
 

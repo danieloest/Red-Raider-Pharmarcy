@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const bodyParser = require("body-parser");
 const { initLiquibase } = require("./database");
 const UserRoutes = require("./routes/UserRoutes");
@@ -16,8 +17,12 @@ app.set("view engine", "ejs");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 const port = 8080;
-
 app.use(express.json());
+// app.use(
+//   cors({
+//     origin: "*",
+//   })
+// );
 
 const sequelize = new Sequelize({
   database: process.env.MYSQL_DATABASE,
@@ -88,6 +93,7 @@ app.get("/errorPage", (req, res) => {
 });
 
 app.use(express.static("public"));
+
 /*
 
 app.listen(port, () => {
