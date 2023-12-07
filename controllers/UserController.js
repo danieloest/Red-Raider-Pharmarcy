@@ -21,6 +21,40 @@ module.exports = {
       });
   },
 
+  createUser: (req, res) => {
+    try {
+      const {
+        body: payload,
+      } = req;
+      if (!Object.keys(payload).length) {
+        return res.status(400).json({
+          status: false,
+          error: {
+            message: "Body is empty, hence can not create the user.",
+          },
+        });
+      }
+
+      console.log(payload);
+
+      const {username, email, password, age, firstName, lastName, role} = payload;
+
+      UserModel.createUser({
+        username,
+        email,
+        password,
+        age,
+        firstName,
+        lastName,
+        role
+      })
+
+    } catch (err) {
+      console.log(err.message);
+    }
+  },
+
+
   updateUser: (req, res) => {
     const {
       user: { userId },

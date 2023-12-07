@@ -29,6 +29,14 @@ module.exports = {
             });
         },
 
+    associate: (sequelize) => {
+        this.model.belongsToMany(sequelize.model("patient"), {
+            through: 'patient_prescription',
+            foreignKey: 'prescriptionId',
+            as: 'patients',
+        });
+    },
+
     createPrescription: (prescription) => {
         return this.model.create(prescription);
     },

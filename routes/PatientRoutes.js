@@ -1,5 +1,6 @@
 const express = require("express");
 const PatientController = require("../controllers/PatientController.js");
+const PrescriptionController = require("../controllers/PrescriptionController.js");
 const router = express.Router();
 
 router.get("/:patientId", PatientController.getPatient);
