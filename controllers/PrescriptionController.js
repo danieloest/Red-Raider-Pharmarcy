@@ -49,7 +49,7 @@ module.exports = {
 
     update: (req, res) => {
         const {
-            prescription: { prescriptionId },
+            params: { prescriptionId },
             body: payload,
         } = req;
 

@@ -50,7 +50,7 @@ module.exports = {
 
   update: (req, res) => {
     const {
-      user: { userId },
+      params: { userId },
       body: payload,
     } = req;
 

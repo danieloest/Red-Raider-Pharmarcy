@@ -48,7 +48,7 @@ module.exports = {
 
   update: (req, res) => {
     const {
-      patient: { patientId },
+      params: { patientId },
       body: payload,
     } = req;
 
