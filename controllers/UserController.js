@@ -22,11 +22,9 @@ module.exports = {
   },
 
   createUser: (req, res) => {
-    try {
-      const {
-        body: payload,
-      } = req;
-      if (!Object.keys(payload).length) {
+    const {username, email, password, age, firstName, lastName, role} = req.body;
+
+      if (!Object.keys(req.body).length) {
         return res.status(400).json({
           status: false,
           error: {
@@ -35,11 +33,7 @@ module.exports = {
         });
       }
 
-      console.log(payload);
-
-      const {username, email, password, age, firstName, lastName, role} = payload;
-
-      UserModel.createUser({
+      const user = {
         username,
         email,
         password,
@@ -47,13 +41,12 @@ module.exports = {
         firstName,
         lastName,
         role
-      })
+      }
 
-    } catch (err) {
-      console.log(err.message);
-    }
+      UserModel.createUser(user)
+          .then((data) => { res.status(201).send(data)})
+          .catch((err) => { console.log(err.message); res.status(500).end()});
   },
-
 
   updateUser: (req, res) => {
     const {
@@ -61,8 +54,6 @@ module.exports = {
       body: payload,
     } = req;
 
-    // IF the payload does not have any keys,
-    // THEN we can return an error, as nothing can be updated
     if (!Object.keys(payload).length) {
       return res.status(400).json({
         status: false,

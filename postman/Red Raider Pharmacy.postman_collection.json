@@ -46,6 +46,32 @@
 				{
 					"name": "One",
 					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"Postman\",\n    \"email\": \"postman@email.com\",\n    \"password\": \"postmanPassword\",\n    \"age\": 23,\n    \"firstName\": \"Post\",\n    \"lastName\": \"Man\",\n    \"role\": \"admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{userBaseUrl}}/",
+							"host": [
+								"{{userBaseUrl}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "One",
+					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
@@ -108,14 +134,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/doctor/{{doctorId}}",
-							"protocol": "http",
+							"raw": "{{doctorBaseUrl}}/{{doctorId}}",
 							"host": [
-								"localhost"
+								"{{doctorBaseUrl}}"
 							],
-							"port": "8080",
 							"path": [
-								"doctor",
 								"{{doctorId}}"
 							]
 						}
@@ -167,15 +190,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/doctor/{{doctorId}}",
-							"protocol": "http",
+							"raw": "{{prescriptionBaseUrl}}/{{prescriptionId}}",
 							"host": [
-								"localhost"
+								"{{prescriptionBaseUrl}}"
 							],
-							"port": "8080",
 							"path": [
-								"doctor",
-								"{{doctorId}}"
+								"{{prescriptionId}}"
 							]
 						}
 					},
@@ -187,12 +207,12 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{doctorBaseUrl}}/{{doctorId}}",
+							"raw": "{{prescriptionBaseUrl}}/{{prescriptionId}}",
 							"host": [
-								"{{doctorBaseUrl}}"
+								"{{prescriptionBaseUrl}}"
 							],
 							"path": [
-								"{{doctorId}}"
+								"{{prescriptionId}}"
 							]
 						}
 					},

@@ -48,8 +48,7 @@ module.exports = {
     },
 
     createUser: (user) => {
-        this.model.create(user)
-
+        return this.model.create(user)
     },
 
     findUser: (query) => {
