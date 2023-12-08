@@ -1,12 +1,12 @@
 const InsuranceModel = require("../models/Insurance.js");
 
 module.exports = {
-  getInsurance: (req, res) => {
+  get: (req, res) => {
     const {
       params: { insuranceId },
     } = req;
 
-    InsuranceModel.findInsurance({ id: insuranceId })
+    InsuranceModel.get({ id: insuranceId })
       .then((insurance) => {
         return res.status(200).json({
           status: true,
@@ -44,7 +44,7 @@ module.exports = {
         .catch((err) => { console.log(err.message); res.status(500).end()});
   },
 
-  updateInsurance: (req, res) => {
+  update: (req, res) => {
     const {
       insurance: { insuranceId },
       body: payload,
@@ -59,9 +59,9 @@ module.exports = {
       });
     }
 
-    InsuranceModel.updateInsurance({ id: insuranceId }, payload)
+    InsuranceModel.update({ id: insuranceId }, payload)
       .then(() => {
-        return InsuranceModel.findInsurance({ id: insuranceId });
+        return InsuranceModel.get({ id: insuranceId });
       })
       .then((insurance) => {
         return res.status(200).json({
@@ -77,12 +77,12 @@ module.exports = {
       });
   },
 
-  deleteInsurance: (req, res) => {
+  delete: (req, res) => {
     const {
       params: { insuranceId },
     } = req;
 
-    InsuranceModel.deleteInsurance({ id: insuranceId })
+    InsuranceModel.delete({ id: insuranceId })
       .then((numberOfEntriesDeleted) => {
         return res.status(200).json({
           status: true,
@@ -99,8 +99,8 @@ module.exports = {
       });
   },
 
-  getAllInsurances: (req, res) => {
-    InsuranceModel.findAllInsurances(req.query)
+  getAll: (req, res) => {
+    InsuranceModel.getAll(req.query)
       .then((insurances) => {
         return res.status(200).json({
           status: true,

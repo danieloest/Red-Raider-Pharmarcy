@@ -5,13 +5,13 @@ const router = express.Router();
 
 router.get(
     "/:userId",
-    UserController.getUser
+    UserController.get
 );
 
 router.get(
     "/",
     [UserPermission.checkPermission('admin')],
-    UserController.getAllUsers
+    UserController.getAll
 );
 
 router.post(
@@ -21,13 +21,13 @@ router.post(
 
 router.patch(
     "/",
-    UserController.updateUser
+    UserController.update
 );
 
 router.delete(
     "/:userId",
     [UserPermission.checkPermission('admin')],
-    UserController.deleteUser
+    UserController.delete
 );
 
 module.exports = router;

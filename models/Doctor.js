@@ -39,25 +39,25 @@ module.exports = {
     return this.model.create(doctor);
   },
 
-  findDoctor: (query) => {
+  get: (query) => {
     return this.model.findOne({
       where: query,
     });
   },
 
-  updateDoctor: (query, updatedValue) => {
+  update: (query, updatedValue) => {
     return this.model.update(updatedValue, {
       where: query,
     });
   },
 
-  findAllDoctors: (query) => {
+  getAll: (query) => {
     return this.model.findAll({
       where: query,
     });
   },
 
-  deleteDoctor: (query) => {
+  delete: (query) => {
     return this.model.destroy({
       where: query,
     });

@@ -5,13 +5,13 @@ const router = express.Router();
 
 router.get(
     "/:doctorId",
-    DoctorController.getDoctor
+    DoctorController.get
 );
 
 router.get(
     "/",
     [UserPermission.checkPermission('admin')],
-    DoctorController.getAllDoctors
+    DoctorController.getAll
 );
 
 router.post(
@@ -21,12 +21,12 @@ router.post(
 
 router.patch(
     "/",
-    DoctorController.updateDoctor
+    DoctorController.update
 );
 
 router.delete(
     "/:doctorId",
-    DoctorController.deleteDoctor
+    DoctorController.delete
 );
 
 module.exports = router;
