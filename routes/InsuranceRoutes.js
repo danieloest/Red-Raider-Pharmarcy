@@ -20,7 +20,7 @@ router.post(
 );
 
 router.patch(
-    "/",
+    "/:insuranceId",
     InsuranceController.update
 );
 

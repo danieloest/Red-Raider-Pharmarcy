@@ -46,7 +46,7 @@ module.exports = {
 
   update: (req, res) => {
     const {
-      insurance: { insuranceId },
+      params: { insuranceId },
       body: payload,
     } = req;
 

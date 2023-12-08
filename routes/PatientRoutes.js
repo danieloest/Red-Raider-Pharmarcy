@@ -20,7 +20,7 @@ router.post(
 );
 
 router.patch(
-    "/",
+    "/:patientId",
     PatientController.update
 );
 

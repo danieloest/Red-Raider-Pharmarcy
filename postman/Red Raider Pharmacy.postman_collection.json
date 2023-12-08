@@ -72,6 +72,32 @@
 				{
 					"name": "One",
 					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"Postman\",\n    \"email\": \"postman@email.com\",\n    \"password\": \"postmanPassword\",\n    \"age\": 23,\n    \"firstName\": \"Post\",\n    \"lastName\": \"Man\",\n    \"role\": \"admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{userBaseUrl}}/{{userId}}",
+							"host": [
+								"{{userBaseUrl}}"
+							],
+							"path": [
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "One",
+					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
@@ -174,6 +200,32 @@
 				{
 					"name": "One",
 					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"firstName\": \"Dr. Post\",\n    \"lastName\": \"Man\",\n    \"email\": \"post.man@email.com\",\n    \"address\": \"123 Post St\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{doctorBaseUrl}}/{{doctorId}}",
+							"host": [
+								"{{doctorBaseUrl}}"
+							],
+							"path": [
+								"{{doctorId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "One",
+					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
@@ -248,6 +300,32 @@
 							],
 							"path": [
 								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "One",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Postman\",\n    \"price\": \"1.99\",\n    \"MaxDosage (mg)\": \"1.00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{prescriptionBaseUrl}}/{{prescriptionId}}",
+							"host": [
+								"{{prescriptionBaseUrl}}"
+							],
+							"path": [
+								"{{prescriptionId}}"
 							]
 						}
 					},
@@ -338,6 +416,32 @@
 				{
 					"name": "One",
 					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Postman Insurance\",\n    \"phone\": \"123-456-7890\",\n    \"address\": \"234 Post St\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{insuranceBaseUrl}}/{{insuranceId}}",
+							"host": [
+								"{{insuranceBaseUrl}}"
+							],
+							"path": [
+								"{{insuranceId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "One",
+					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
@@ -412,6 +516,32 @@
 							],
 							"path": [
 								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "One",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"Post\",\n    \"lastName\": \"Man\",\n    \"email\": \"post.man@email.com\",\n    \"phone\": \"123-321-4567\",\n    \"address\": \"987 Post St.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{patientBaseUrl}}/{{patientId}}",
+							"host": [
+								"{{patientBaseUrl}}"
+							],
+							"path": [
+								"{{patientId}}"
 							]
 						}
 					},
