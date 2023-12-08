@@ -30,7 +30,7 @@ module.exports = {
             });
     },
 
-    createInsurance: (insurance) => {
+    create: (insurance) => {
         return this.model.create(insurance);
     },
 

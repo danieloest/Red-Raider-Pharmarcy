@@ -21,14 +21,39 @@ module.exports = {
       });
   },
 
+  create: (req, res) => {
+    const {username, email, password, age, firstName, lastName, role} = req.body;
+
+      if (!Object.keys(req.body).length) {
+        return res.status(400).json({
+          status: false,
+          error: {
+            message: "Body is empty, hence can not create the user.",
+          },
+        });
+      }
+
+      const user = {
+        username,
+        email,
+        password,
+        age,
+        firstName,
+        lastName,
+        role
+      }
+
+      UserModel.create(user)
+          .then((data) => { res.status(201).send(data)})
+          .catch((err) => { console.log(err.message); res.status(500).end()});
+  },
+
   updateUser: (req, res) => {
     const {
       user: { userId },
       body: payload,
     } = req;
 
-    // IF the payload does not have any keys,
-    // THEN we can return an error, as nothing can be updated
     if (!Object.keys(payload).length) {
       return res.status(400).json({
         status: false,

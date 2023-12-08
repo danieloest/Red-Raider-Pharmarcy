@@ -14,6 +14,11 @@ router.get(
     UserController.getAllUsers
 );
 
+router.post(
+    "/",
+    UserController.create,
+);
+
 router.patch(
     "/",
     UserController.updateUser

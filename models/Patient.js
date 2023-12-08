@@ -23,6 +23,10 @@ const PatientModel = {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
+  address: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  }
 };
 
 module.exports = {
@@ -30,23 +34,39 @@ module.exports = {
     this.model = sequelize.define("patient", PatientModel, {
       defaultScope: {
         include: [
-            {
-              as: "insurance",
-              model: sequelize.model("insurance"),
+          {
+            as: "insurance",
+            model: sequelize.model("insurance"),
+          },
+          {
+            as: "doctors",
+            model: sequelize.model("doctor"),
+          },
+          {
+            as: "prescriptions",
+            model: sequelize.model("prescription"),
           }]
       },
       freezeTableName: true,
       tableName: "patient",
     });
+    },
+
+  associate: (sequelize) => {
     this.model.belongsTo(sequelize.model("insurance"));
     this.model.belongsToMany(sequelize.model("prescription"), {
       through: 'patient_prescription',
       foreignKey: 'patientId',
       as: 'prescriptions',
     });
-    },
+    this.model.belongsToMany(sequelize.model("doctor"), {
+      through: 'patient_doctor',
+      foreignKey: "patientId",
+      as: "doctors",
+    })
+  },
 
-  createPatient: (patient) => {
+  create: (patient) => {
     return this.model.create(patient);
   },
 

@@ -21,20 +21,29 @@ module.exports = {
       });
   },
 
-  createPatient: (req, res) => {
-    PatientModel.createPatient(req.query)
-        .then((patient) => {
-          return res.status(200).json({
-            status: true,
-            data: patient.toJSON(),
-          });
-        })
-        .catch((err) => {
-          return res.status(500).json({
-            status: false,
-            error: err,
-          });
-        });
+  create: (req, res) => {
+    const {firstName, lastName, email, phone, address} = req.body;
+
+    if (!Object.keys(req.body).length) {
+      return res.status(400).json({
+        status: false,
+        error: {
+          message: "Body is empty, hence can not create the patient.",
+        },
+      });
+    }
+
+    const patient = {
+      firstName,
+      lastName,
+      email,
+      phone,
+      address
+    }
+
+    PatientModel.create(patient)
+        .then((data) => { res.status(201).send(data)})
+        .catch((err) => { console.log(err.message); res.status(500).end()});
   },
 
   updatePatient: (req, res) => {

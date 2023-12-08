@@ -21,6 +21,29 @@ module.exports = {
       });
   },
 
+  create: (req, res) => {
+    const {name, phone, address} = req.body;
+
+    if (!Object.keys(req.body).length) {
+      return res.status(400).json({
+        status: false,
+        error: {
+          message: "Body is empty, hence can not create the insurance.",
+        },
+      });
+    }
+
+    const insurance = {
+      name,
+      phone,
+      address
+    }
+
+    InsuranceModel.create(insurance)
+        .then((data) => { res.status(201).send(data)})
+        .catch((err) => { console.log(err.message); res.status(500).end()});
+  },
+
   updateInsurance: (req, res) => {
     const {
       insurance: { insuranceId },

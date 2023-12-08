@@ -14,6 +14,11 @@ router.get(
     InsuranceController.getAllInsurances
 );
 
+router.post(
+    "/",
+    InsuranceController.create,
+);
+
 router.patch(
     "/",
     InsuranceController.updateInsurance

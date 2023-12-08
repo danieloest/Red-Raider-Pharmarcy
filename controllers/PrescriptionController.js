@@ -21,6 +21,32 @@ module.exports = {
             });
     },
 
+    create: (req, res) => {
+
+        const {name, price, "MaxDosage (mg)": MaxDosage} = req.body;
+
+        if (!Object.keys(req.body).length) {
+            return res.status(400).json({
+                status: false,
+                error: {
+                    message: "Body is empty, hence can not create the prescription.",
+                },
+            });
+        }
+
+        console.log(name, price, MaxDosage)
+
+        const prescription = {
+            name,
+            price,
+            "MaxDosage (mg)": MaxDosage
+        }
+
+        PrescriptionModel.create(prescription)
+            .then((data) => { res.status(201).send(data)})
+            .catch((err) => { console.log(err.message); res.status(500).end()});
+    },
+
     updatePrescription: (req, res) => {
         const {
             prescription: { prescriptionId },
