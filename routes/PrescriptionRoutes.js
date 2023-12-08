@@ -1,5 +1,6 @@
 const express = require("express");
 const PrescriptionController = require("../controllers/PrescriptionController");
+const UserPermission = require("../middleware/UserPermission");
 const router = express.Router();
 
 router.get(
@@ -9,6 +10,7 @@ router.get(
 
 router.get(
     "/",
+    [UserPermission.checkPermission('admin')],
     PrescriptionController.getAllPrescriptions
 );
 
