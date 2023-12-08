@@ -1,6 +1,5 @@
 const express = require("express");
 const DoctorController = require("../controllers/DoctorController.js");
-const PrescriptionController = require("../controllers/PrescriptionController");
 const router = express.Router();
 
 router.get(

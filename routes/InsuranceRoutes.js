@@ -1,7 +1,6 @@
 const express = require("express");
 const InsuranceController = require("../controllers/InsuranceController");
 const UserPermission = require("../middleware/UserPermission");
-const PrescriptionController = require("../controllers/PrescriptionController");
 const router = express.Router();
 
 router.get(
