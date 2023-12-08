@@ -1,12 +1,12 @@
 const DoctorModel = require("../models/Doctor.js");
 
 module.exports = {
-  getDoctor: (req, res) => {
+  get: (req, res) => {
     const {
       params: { doctorId },
     } = req;
 
-    DoctorModel.findDoctor({ id: doctorId })
+    DoctorModel.get({ id: doctorId })
       .then((doctor) => {
         return res.status(200).json({
           status: true,
@@ -45,7 +45,7 @@ module.exports = {
         .catch((err) => { console.log(err.message); res.status(500).end()});
   },
 
-  updateDoctor: (req, res) => {
+  update: (req, res) => {
     const {
       doctor: { doctorId },
       body: payload,
@@ -62,9 +62,9 @@ module.exports = {
       });
     }
 
-    DoctorModel.updateDoctor({ id: doctorId }, payload)
+    DoctorModel.update({ id: doctorId }, payload)
       .then(() => {
-        return DoctorModel.findDoctor({ id: doctorId });
+        return DoctorModel.get({ id: doctorId });
       })
       .then((doctor) => {
         return res.status(200).json({
@@ -80,12 +80,12 @@ module.exports = {
       });
   },
 
-  deleteDoctor: (req, res) => {
+  delete: (req, res) => {
     const {
       params: { doctorId },
     } = req;
 
-    DoctorModel.deleteDoctor({ id: doctorId })
+    DoctorModel.delete({ id: doctorId })
       .then((numberOfEntriesDeleted) => {
         return res.status(200).json({
           status: true,
@@ -102,8 +102,8 @@ module.exports = {
       });
   },
 
-  getAllDoctors: (req, res) => {
-    DoctorModel.findAllDoctors(req.query)
+  getAll: (req, res) => {
+    DoctorModel.getAll(req.query)
       .then((doctors) => {
         return res.status(200).json({
           status: true,

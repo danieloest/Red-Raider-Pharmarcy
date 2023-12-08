@@ -1,12 +1,12 @@
 const PatientModel = require("../models/Patient");
 
 module.exports = {
-  getPatient: (req, res) => {
+  get: (req, res) => {
     const {
       params: { patientId },
     } = req;
 
-    PatientModel.findPatient({ id: patientId } )
+    PatientModel.get({ id: patientId } )
       .then((patient) => {
         return res.status(200).json({
           status: true,
@@ -46,7 +46,7 @@ module.exports = {
         .catch((err) => { console.log(err.message); res.status(500).end()});
   },
 
-  updatePatient: (req, res) => {
+  update: (req, res) => {
     const {
       patient: { patientId },
       body: payload,
@@ -63,9 +63,9 @@ module.exports = {
       });
     }
 
-    PatientModel.updatePatient({ id: patientId }, payload)
+    PatientModel.update({ id: patientId }, payload)
       .then(() => {
-        return PatientModel.findPatient({ id: patientId });
+        return PatientModel.get({ id: patientId });
       })
       .then((patient) => {
         return res.status(200).json({
@@ -81,12 +81,12 @@ module.exports = {
       });
   },
 
-  deletePatient: (req, res) => {
+  delete: (req, res) => {
     const {
       params: { patientId },
     } = req;
 
-    PatientModel.deletePatient({ id: patientId })
+    PatientModel.delete({ id: patientId })
       .then((numberOfEntriesDeleted) => {
         return res.status(200).json({
           status: true,
@@ -103,8 +103,8 @@ module.exports = {
       });
   },
 
-  getAllPatients: (req, res) => {
-    PatientModel.findAllPatients(req.query)
+  getAll: (req, res) => {
+    PatientModel.getAll(req.query)
       .then((patients) => {
         return res.status(200).json({
           status: true,

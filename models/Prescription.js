@@ -41,25 +41,25 @@ module.exports = {
         return this.model.create(prescription);
     },
 
-    findPrescription: (query) => {
+    get: (query) => {
         return this.model.findOne({
             where: query,
         });
     },
 
-    updatePrescription: (query, updatedValue) => {
+    update: (query, updatedValue) => {
         return this.model.update(updatedValue, {
             where: query,
         });
     },
 
-    findAllPrescriptions: (query) => {
+    getAll: (query) => {
         return this.model.findAll({
             where: query
         });
     },
 
-    deletePrescription: (query) => {
+    delete: (query) => {
         return this.model.destroy({
             where: query
         });

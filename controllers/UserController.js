@@ -1,12 +1,12 @@
 const UserModel = require("../models/User.js");
 
 module.exports = {
-  getUser: (req, res) => {
+  get: (req, res) => {
     const {
       params: { userId },
     } = req;
 
-    UserModel.findUser({ id: userId })
+    UserModel.get({ id: userId })
       .then((user) => {
         return res.status(200).json({
           status: true,
@@ -48,7 +48,7 @@ module.exports = {
           .catch((err) => { console.log(err.message); res.status(500).end()});
   },
 
-  updateUser: (req, res) => {
+  update: (req, res) => {
     const {
       user: { userId },
       body: payload,
@@ -63,9 +63,9 @@ module.exports = {
       });
     }
 
-    UserModel.updateUser({ id: userId }, payload)
+    UserModel.update({ id: userId }, payload)
       .then(() => {
-        return UserModel.findUser({ id: userId });
+        return UserModel.get({ id: userId });
       })
       .then((user) => {
         return res.status(200).json({
@@ -81,12 +81,12 @@ module.exports = {
       });
   },
 
-  deleteUser: (req, res) => {
+  delete: (req, res) => {
     const {
       params: { userId },
     } = req;
 
-    UserModel.deleteUser({ id: userId })
+    UserModel.delete({ id: userId })
       .then((numberOfEntriesDeleted) => {
         return res.status(200).json({
           status: true,
@@ -103,8 +103,8 @@ module.exports = {
       });
   },
 
-  getAllUsers: (req, res) => {
-    UserModel.findAllUsers(req.query)
+  getAll: (req, res) => {
+    UserModel.getAll(req.query)
       .then((users) => {
         return res.status(200).json({
           status: true,

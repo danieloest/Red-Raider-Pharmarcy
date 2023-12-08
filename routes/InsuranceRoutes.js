@@ -5,13 +5,13 @@ const router = express.Router();
 
 router.get(
     "/:insuranceId",
-    InsuranceController.getInsurance
+    InsuranceController.get
     );
 
 router.get(
     "/",
     [UserPermission.checkPermission('admin')],
-    InsuranceController.getAllInsurances
+    InsuranceController.getAll
 );
 
 router.post(
@@ -21,13 +21,13 @@ router.post(
 
 router.patch(
     "/",
-    InsuranceController.updateInsurance
+    InsuranceController.update
 );
 
 router.delete(
     "/:insuranceId",
     [UserPermission.checkPermission('admin')],
-    InsuranceController.deleteInsurance
+    InsuranceController.delete
 )
 
 module.exports = router;

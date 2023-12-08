@@ -1,12 +1,12 @@
 const PrescriptionModel = require("../models/Prescription.js");
 
 module.exports = {
-    getPrescription: (req, res) => {
+    get: (req, res) => {
         const {
             params: { prescriptionId },
         } = req;
 
-        PrescriptionModel.findPrescription({ id: prescriptionId })
+        PrescriptionModel.get({ id: prescriptionId })
             .then((prescription) => {
                 return res.status(200).json({
                     status: true,
@@ -47,7 +47,7 @@ module.exports = {
             .catch((err) => { console.log(err.message); res.status(500).end()});
     },
 
-    updatePrescription: (req, res) => {
+    update: (req, res) => {
         const {
             prescription: { prescriptionId },
             body: payload,
@@ -64,9 +64,9 @@ module.exports = {
             });
         }
 
-        PrescriptionModel.updatePrescription({ id: prescriptionId }, payload)
+        PrescriptionModel.update({ id: prescriptionId }, payload)
             .then(() => {
-                return PrescriptionModel.findPrescription({ id: prescriptionId });
+                return PrescriptionModel.get({ id: prescriptionId });
             })
             .then((prescription) => {
                 return res.status(200).json({
@@ -82,12 +82,12 @@ module.exports = {
             });
     },
 
-    deletePrescription: (req, res) => {
+    delete: (req, res) => {
         const {
             params: { prescriptionId },
         } = req;
 
-        PrescriptionModel.deletePrescription({ id: prescriptionId })
+        PrescriptionModel.delete({ id: prescriptionId })
             .then((numberOfEntriesDeleted) => {
                 return res.status(200).json({
                     status: true,
@@ -104,8 +104,8 @@ module.exports = {
             });
     },
 
-    getAllPrescriptions: (req, res) => {
-        PrescriptionModel.findAllPrescriptions(req.query)
+    getAll: (req, res) => {
+        PrescriptionModel.getAll(req.query)
             .then((prescriptions) => {
                 return res.status(200).json({
                     status: true,

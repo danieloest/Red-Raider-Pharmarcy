@@ -70,25 +70,25 @@ module.exports = {
     return this.model.create(patient);
   },
 
-  findPatient: (query) => {
+  get: (query) => {
     return this.model.findOne({
       where: query,
     });
   },
 
-  updatePatient: (query, updatedValue) => {
+  update: (query, updatedValue) => {
     return this.model.update(updatedValue, {
       where: query,
     });
   },
 
-  findAllPatients: (query) => {
+  getAll: (query) => {
     return this.model.findAll({
       where: query,
     });
   },
 
-  deletePatient: (query) => {
+  delete: (query) => {
     return this.model.destroy({
       where: query,
     });
