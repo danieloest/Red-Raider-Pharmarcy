@@ -37,7 +37,7 @@ module.exports = {
         });
     },
 
-    createPrescription: (prescription) => {
+    create: (prescription) => {
         return this.model.create(prescription);
     },
 

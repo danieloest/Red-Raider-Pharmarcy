@@ -47,7 +47,7 @@ module.exports = {
             });
     },
 
-    createUser: (user) => {
+    create: (user) => {
         return this.model.create(user)
     },
 

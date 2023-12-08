@@ -1,6 +1,7 @@
 const express = require("express");
 const InsuranceController = require("../controllers/InsuranceController");
 const UserPermission = require("../middleware/UserPermission");
+const PrescriptionController = require("../controllers/PrescriptionController");
 const router = express.Router();
 
 router.get(
@@ -12,6 +13,11 @@ router.get(
     "/",
     [UserPermission.checkPermission('admin')],
     InsuranceController.getAllInsurances
+);
+
+router.post(
+    "/",
+    InsuranceController.create,
 );
 
 router.patch(

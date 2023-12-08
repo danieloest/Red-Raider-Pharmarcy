@@ -21,6 +21,30 @@ module.exports = {
       });
   },
 
+  create: (req, res) => {
+    const {firstName, lastName, email, address} = req.body;
+
+    if (!Object.keys(req.body).length) {
+      return res.status(400).json({
+        status: false,
+        error: {
+          message: "Body is empty, hence can not create the doctor.",
+        },
+      });
+    }
+
+    const doctor = {
+      firstName,
+      lastName,
+      email,
+      address
+    }
+
+    DoctorModel.create(doctor)
+        .then((data) => { res.status(201).send(data)})
+        .catch((err) => { console.log(err.message); res.status(500).end()});
+  },
+
   updateDoctor: (req, res) => {
     const {
       doctor: { doctorId },

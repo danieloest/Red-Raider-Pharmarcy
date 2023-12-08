@@ -2,12 +2,29 @@ const express = require("express");
 const PrescriptionController = require("../controllers/PrescriptionController");
 const router = express.Router();
 
-router.get("/:prescriptionId", PrescriptionController.getPrescription);
+router.get(
+    "/:prescriptionId",
+    PrescriptionController.getPrescription
+);
 
-router.get("/", PrescriptionController.getAllPrescriptions);
+router.get(
+    "/",
+    PrescriptionController.getAllPrescriptions
+);
 
-router.patch("/", PrescriptionController.updatePrescription);
+router.post(
+    "/",
+    PrescriptionController.create,
+);
 
-router.delete("/:prescriptionId", PrescriptionController.deletePrescription);
+router.patch(
+    "/",
+    PrescriptionController.updatePrescription
+);
+
+router.delete(
+    "/:prescriptionId",
+    PrescriptionController.deletePrescription
+);
 
 module.exports = router;

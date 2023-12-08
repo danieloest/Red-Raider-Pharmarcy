@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "Users",
+			"name": "User",
 			"item": [
 				{
 					"name": "All",
@@ -109,7 +109,7 @@
 			]
 		},
 		{
-			"name": "Doctors",
+			"name": "Doctor",
 			"item": [
 				{
 					"name": "All",
@@ -148,6 +148,32 @@
 				{
 					"name": "One",
 					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"firstName\": \"Dr. Post\",\n    \"lastName\": \"Man\",\n    \"email\": \"post.man@email.com\",\n    \"address\": \"123 Post St\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{doctorBaseUrl}}/",
+							"host": [
+								"{{doctorBaseUrl}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "One",
+					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
@@ -165,7 +191,7 @@
 			]
 		},
 		{
-			"name": "Prescriptions",
+			"name": "Prescription",
 			"item": [
 				{
 					"name": "All",
@@ -196,6 +222,32 @@
 							],
 							"path": [
 								"{{prescriptionId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "One",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Postman\",\n    \"price\": \"1.99\",\n    \"MaxDosage (mg)\": \"1.00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{prescriptionBaseUrl}}/",
+							"host": [
+								"{{prescriptionBaseUrl}}"
+							],
+							"path": [
+								""
 							]
 						}
 					},
@@ -260,6 +312,32 @@
 				{
 					"name": "One",
 					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Postman Insurance\",\n    \"phone\": \"123-456-7890\",\n    \"address\": \"234 Post St\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{insuranceBaseUrl}}/",
+							"host": [
+								"{{insuranceBaseUrl}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "One",
+					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
@@ -277,7 +355,7 @@
 			]
 		},
 		{
-			"name": "Patients",
+			"name": "Patient",
 			"item": [
 				{
 					"name": "All",
@@ -308,6 +386,32 @@
 							],
 							"path": [
 								"{{patientId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "One",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"Post\",\n    \"lastName\": \"Man\",\n    \"email\": \"post.man@email.com\",\n    \"phone\": \"123-321-4567\",\n    \"address\": \"987 Post St.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{patientBaseUrl}}/",
+							"host": [
+								"{{patientBaseUrl}}"
+							],
+							"path": [
+								""
 							]
 						}
 					},

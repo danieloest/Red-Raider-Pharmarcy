@@ -21,7 +21,7 @@ module.exports = {
       });
   },
 
-  createUser: (req, res) => {
+  create: (req, res) => {
     const {username, email, password, age, firstName, lastName, role} = req.body;
 
       if (!Object.keys(req.body).length) {
@@ -43,7 +43,7 @@ module.exports = {
         role
       }
 
-      UserModel.createUser(user)
+      UserModel.create(user)
           .then((data) => { res.status(201).send(data)})
           .catch((err) => { console.log(err.message); res.status(500).end()});
   },

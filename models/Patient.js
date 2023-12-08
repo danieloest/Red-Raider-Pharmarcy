@@ -23,6 +23,10 @@ const PatientModel = {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
+  address: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  }
 };
 
 module.exports = {
@@ -62,7 +66,7 @@ module.exports = {
     })
   },
 
-  createPatient: (patient) => {
+  create: (patient) => {
     return this.model.create(patient);
   },
 

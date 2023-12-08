@@ -14,6 +14,11 @@ router.get(
     UserController.getAllUsers
 );
 
+router.post(
+    "/",
+    UserController.create,
+);
+
 router.patch(
     "/",
     UserController.updateUser
@@ -24,10 +29,5 @@ router.delete(
     [UserPermission.checkPermission('admin')],
     UserController.deleteUser
 );
-
-router.post(
-    "/",
-        UserController.createUser,
-)
 
 module.exports = router;

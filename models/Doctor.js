@@ -35,7 +35,7 @@ module.exports = {
         });
   },
 
-  createDoctor: (doctor) => {
+  create: (doctor) => {
     return this.model.create(doctor);
   },
 
