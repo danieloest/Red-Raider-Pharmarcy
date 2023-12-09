@@ -10,18 +10,18 @@ module.exports = {
     } = req;
 
     PatientModel.get({ id: patientId } )
-      .then((patient) => {
-        return res.status(200).json({
-          status: true,
-          data: patient,
+        .then((patient) => {
+          return res.status(200).json({
+            status: true,
+            data: patient,
+          })})
+        .catch((err) => {
+          console.log(err);
+          return res.status(500).json({
+            status: false,
+            error: "Patient was not found.",
+          });
         });
-      })
-      .catch((err) => {
-        return res.status(500).json({
-          status: false,
-          error: err,
-        });
-      });
   },
 
   create: (req, res) => {
@@ -48,12 +48,17 @@ module.exports = {
     InsuranceModel.get( {id: insuranceId} )
         .then(
             PatientModel.create(patient, {insuranceId: insuranceId})
-                .then((data) => {
-                  res.status(201).send(data)
-                })
+                .then((patient) => {
+                  return res.status(201).json({
+                    status: true,
+                    data: patient,
+                  })})
                 .catch((err) => {
-                  console.log(err.message);
-                  res.status(500).end()
+                  console.log(err);
+                  return res.status(500).json({
+                    status: false,
+                    error: "Patient was not created.",
+                  });
                 })
         )
         .catch(() => {
@@ -80,21 +85,18 @@ module.exports = {
     }
 
     PatientModel.update({ id: patientId }, payload)
-      .then(() => {
-        return PatientModel.get({ id: patientId });
-      })
-      .then((patient) => {
-        return res.status(200).json({
-          status: true,
-          data: patient.toJSON(),
+        .then((patient) => {
+          return res.status(200).json({
+            status: true,
+            data: patient,
+          })})
+        .catch((err) => {
+          console.log(err);
+          return res.status(500).json({
+            status: false,
+            error: "Patient was not updated.",
+          });
         });
-      })
-      .catch((err) => {
-        return res.status(500).json({
-          status: false,
-          error: err,
-        });
-      });
   },
 
   delete: (req, res) => {
@@ -112,27 +114,28 @@ module.exports = {
         });
       })
       .catch((err) => {
+        console.log(err);
         return res.status(500).json({
           status: false,
-          error: err,
+          error: "Patient was not deleted.",
         });
       });
   },
 
   getAll: (req, res) => {
     PatientModel.getAll(req.query)
-      .then((patients) => {
-        return res.status(200).json({
-          status: true,
-          data: patients,
+        .then((patients) => {
+          return res.status(200).json({
+            status: true,
+            data: patients,
+          })})
+        .catch((err) => {
+          console.log(err);
+          return res.status(500).json({
+            status: false,
+            error: "Patients were not found.",
+          });
         });
-      })
-      .catch((err) => {
-        return res.status(500).json({
-          status: false,
-          error: err,
-        });
-      });
   },
 
   addDoctor: (req, res) => {
@@ -164,7 +167,8 @@ module.exports = {
             data: data
           });
         })
-        .catch(() => {
+        .catch((err) => {
+          console.log(err);
           res.status(500).json({
             status: false,
             error: {
@@ -203,7 +207,8 @@ module.exports = {
             data: data
           });
         })
-        .catch(() => {
+        .catch((err) => {
+          console.log(err);
           res.status(500).json({
             status: false,
             error: {
