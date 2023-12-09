@@ -45,7 +45,8 @@ module.exports = {
 
     PatientModel.create(patient)
       .then((data) => {
-        res.status(201).send(data);
+        return res.render("newPatientConfirmation.ejs", { data });
+        // res.status(201).send(data);
       })
       .catch((err) => {
         console.log(err.message);

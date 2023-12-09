@@ -85,18 +85,27 @@ module.exports = {
   },
 
   getAll: (query) => {
-    return this.model.findAll({
-      // where: query,
-      where: {
-        [Op.or]: [
-          { firstName: { [Op.like]: "%" + query.searchTerm + "%" } },
-          { lastName: { [Op.like]: "%" + query.searchTerm + "%" } },
-          { email: { [Op.like]: "%" + query.searchTerm + "%" } },
-          { phone: { [Op.like]: "%" + query.searchTerm + "%" } },
-          { address: { [Op.like]: "%" + query.searchTerm + "%" } },
-        ],
-      },
-    });
+    console.log(query);
+    // Request from Postman
+    if (Object.keys(query).length === 0) {
+      return this.model.findAll({
+        where: query,
+      });
+    }
+    // For WHERE statements
+    else {
+      return this.model.findAll({
+        where: {
+          [Op.or]: [
+            { firstName: { [Op.like]: "%" + query.searchTerm + "%" } },
+            { lastName: { [Op.like]: "%" + query.searchTerm + "%" } },
+            { email: { [Op.like]: "%" + query.searchTerm + "%" } },
+            { phone: { [Op.like]: "%" + query.searchTerm + "%" } },
+            { address: { [Op.like]: "%" + query.searchTerm + "%" } },
+          ],
+        },
+      });
+    }
   },
 
   delete: (query) => {

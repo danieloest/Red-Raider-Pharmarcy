@@ -85,7 +85,7 @@ app.get("/patients", (req, res) => {
   res.render("patients.ejs");
 });
 app.get("/createPatient", (req, res) => {
-  var insurances_promise = InsuranceModel.findAllInsurances();
+  var insurances_promise = InsuranceModel.getAll();
   insurances_promise.then((insurances) => {
     res.render("createPatient.ejs", { insurances });
   });

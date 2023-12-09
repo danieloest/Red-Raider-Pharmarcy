@@ -3,32 +3,19 @@ const PatientController = require("../controllers/PatientController.js");
 const UserPermission = require("../middleware/UserPermission");
 const router = express.Router();
 
-router.get(
-    "/:patientId",
-    PatientController.get
-);
+router.get("/:patientId", PatientController.get);
 
 router.get(
-    "/",
-    [UserPermission.checkPermission('admin')],
-    PatientController.getAll
+  "/",
+  // Commented out the permissions so that it would work on the website
+  //   [UserPermission.checkPermission("admin")],
+  PatientController.getAll
 );
 
-router.post(
-    "/",
-    PatientController.create,
-);
+router.post("/", PatientController.create);
 
-router.patch(
-    "/:patientId",
-    PatientController.update
-);
+router.patch("/:patientId", PatientController.update);
 
-router.delete(
-    "/:patientId",
-    PatientController.delete
-);
-
-router.post("/createPatient", PatientController.createPatient);
+router.delete("/:patientId", PatientController.delete);
 
 module.exports = router;
