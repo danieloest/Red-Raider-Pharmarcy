@@ -7,18 +7,18 @@ module.exports = {
     } = req;
 
     InsuranceModel.get({ id: insuranceId })
-      .then((insurance) => {
-        return res.status(200).json({
-          status: true,
-          data: insurance,
+        .then((insurance) => {
+          return res.status(200).json({
+            status: true,
+            data: insurance,
+          })})
+        .catch((err) => {
+          console.log(err);
+          return res.status(500).json({
+            status: false,
+            error: "Insurance was not found.",
+          });
         });
-      })
-      .catch(() => {
-        return res.status(500).json({
-          status: false,
-          error: "Insurance does not exist",
-        });
-      });
   },
 
   create: (req, res) => {
@@ -40,8 +40,18 @@ module.exports = {
     }
 
     InsuranceModel.create(insurance)
-        .then((data) => { res.status(201).send(data)})
-        .catch((err) => { console.log(err.message); res.status(500).end()});
+        .then((insurance) => {
+          return res.status(201).json({
+            status: true,
+            data: insurance,
+          })})
+        .catch((err) => {
+          console.log(err);
+          return res.status(500).json({
+            status: false,
+            error: "Insurance was not created.",
+          });
+        });
   },
 
   update: (req, res) => {
@@ -63,18 +73,18 @@ module.exports = {
       .then(() => {
         return InsuranceModel.get({ id: insuranceId });
       })
-      .then((insurance) => {
-        return res.status(200).json({
-          status: true,
-          data: insurance.toJSON(),
+        .then((insurance) => {
+          return res.status(200).json({
+            status: true,
+            data: insurance,
+          })})
+        .catch((err) => {
+          console.log(err);
+          return res.status(500).json({
+            status: false,
+            error: "Insurance was not updated.",
+          });
         });
-      })
-      .catch((err) => {
-        return res.status(500).json({
-          status: false,
-          error: err,
-        });
-      });
   },
 
   delete: (req, res) => {
@@ -92,26 +102,27 @@ module.exports = {
         });
       })
       .catch((err) => {
+        console.log(err);
         return res.status(500).json({
           status: false,
-          error: err,
+          error: "Insurance was not deleted.",
         });
       });
   },
 
   getAll: (req, res) => {
     InsuranceModel.getAll(req.query)
-      .then((insurances) => {
-        return res.status(200).json({
-          status: true,
-          data: insurances,
+        .then((insurance) => {
+          return res.status(200).json({
+            status: true,
+            data: insurance,
+          })})
+        .catch((err) => {
+          console.log(err);
+          return res.status(500).json({
+            status: false,
+            error: "Insurances were not found.",
+          });
         });
-      })
-      .catch((err) => {
-        return res.status(500).json({
-          status: false,
-          error: err,
-        });
-      });
   },
 };

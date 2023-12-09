@@ -7,16 +7,16 @@ module.exports = {
     } = req;
 
     DoctorModel.get({ id: doctorId })
-      .then((doctor) => {
-        return res.status(200).json({
-          status: true,
-          data: doctor,
-        });
-      })
-      .catch((err) => {
+        .then((doctor) => {
+              return res.status(200).json({
+                status: true,
+                data: doctor,
+              })})
+        .catch((err) => {
+        console.log(err);
         return res.status(500).json({
           status: false,
-          error: err,
+          error: "Doctor was not found.",
         });
       });
   },
@@ -26,7 +26,6 @@ module.exports = {
 
     if (!Object.keys(req.body).length) {
       return res.status(400).json({
-        status: false,
         error: {
           message: "Body is empty, hence can not create the doctor.",
         },
@@ -41,8 +40,18 @@ module.exports = {
     }
 
     DoctorModel.create(doctor)
-        .then((data) => { res.status(201).send(data)})
-        .catch((err) => { console.log(err.message); res.status(500).end()});
+        .then((doctor) => {
+          return res.status(201).json({
+            status: true,
+            data: doctor,
+          })})
+        .catch((err) => {
+          console.log(err);
+          return res.status(500).json({
+            status: false,
+            error: "Doctor was not created.",
+          });
+        });
   },
 
   update: (req, res) => {
@@ -51,8 +60,6 @@ module.exports = {
       body: payload,
     } = req;
 
-    // IF the payload does not have any keys,
-    // THEN we can return an error, as nothing can be updated
     if (!Object.keys(payload).length) {
       return res.status(400).json({
         status: false,
@@ -66,18 +73,18 @@ module.exports = {
       .then(() => {
         return DoctorModel.get({ id: doctorId });
       })
-      .then((doctor) => {
-        return res.status(200).json({
-          status: true,
-          data: doctor.toJSON(),
+        .then((doctor) => {
+          return res.status(200).json({
+            status: true,
+            data: doctor,
+          })})
+        .catch((err) => {
+          console.log(err);
+          return res.status(500).json({
+            status: false,
+            error: "Doctor was not updated.",
+          });
         });
-      })
-      .catch((err) => {
-        return res.status(500).json({
-          status: false,
-          error: err,
-        });
-      });
   },
 
   delete: (req, res) => {
@@ -95,26 +102,27 @@ module.exports = {
         });
       })
       .catch((err) => {
+        console.log(err);
         return res.status(500).json({
           status: false,
-          error: err,
+          error: "Doctor was not deleted",
         });
       });
   },
 
   getAll: (req, res) => {
     DoctorModel.getAll(req.query)
-      .then((doctors) => {
-        return res.status(200).json({
-          status: true,
-          data: doctors,
+        .then((doctors) => {
+          return res.status(200).json({
+            status: true,
+            data: doctors,
+          })})
+        .catch((err) => {
+          console.log(err);
+          return res.status(500).json({
+            status: false,
+            error: "Doctors were not found.",
+          });
         });
-      })
-      .catch((err) => {
-        return res.status(500).json({
-          status: false,
-          error: err,
-        });
-      });
   },
 };

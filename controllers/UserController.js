@@ -7,18 +7,18 @@ module.exports = {
     } = req;
 
     UserModel.get({ id: userId })
-      .then((user) => {
-        return res.status(200).json({
-          status: true,
-          data: user,
+        .then((user) => {
+          return res.status(200).json({
+            status: true,
+            data: user,
+          })})
+        .catch((err) => {
+          console.log(err);
+          return res.status(500).json({
+            status: false,
+            error: "User was not found.",
+          });
         });
-      })
-      .catch((err) => {
-        return res.status(500).json({
-          status: false,
-          error: err,
-        });
-      });
   },
 
   create: (req, res) => {
@@ -44,8 +44,18 @@ module.exports = {
       }
 
       UserModel.create(user)
-          .then((data) => { res.status(201).send(data)})
-          .catch((err) => { console.log(err.message); res.status(500).end()});
+          .then((user) => {
+            return res.status(201).json({
+              status: true,
+              data: user,
+            })})
+          .catch((err) => {
+            console.log(err);
+            return res.status(500).json({
+              status: false,
+              error: "User was not created.",
+            });
+          });
   },
 
   update: (req, res) => {
@@ -64,21 +74,18 @@ module.exports = {
     }
 
     UserModel.update({ id: userId }, payload)
-      .then(() => {
-        return UserModel.get({ id: userId });
-      })
-      .then((user) => {
-        return res.status(200).json({
-          status: true,
-          data: user.toJSON(),
+        .then((user) => {
+          return res.status(200).json({
+            status: true,
+            data: user,
+          })})
+        .catch((err) => {
+          console.log(err);
+          return res.status(500).json({
+            status: false,
+            error: "User was not updated.",
+          });
         });
-      })
-      .catch((err) => {
-        return res.status(500).json({
-          status: false,
-          error: err,
-        });
-      });
   },
 
   delete: (req, res) => {
@@ -96,26 +103,27 @@ module.exports = {
         });
       })
       .catch((err) => {
+        console.log(err);
         return res.status(500).json({
           status: false,
-          error: err,
+          error: "User was not deleted.",
         });
       });
   },
 
   getAll: (req, res) => {
     UserModel.getAll(req.query)
-      .then((users) => {
-        return res.status(200).json({
-          status: true,
-          data: users,
+        .then((user) => {
+          return res.status(200).json({
+            status: true,
+            data: user,
+          })})
+        .catch((err) => {
+          console.log(err);
+          return res.status(500).json({
+            status: false,
+            error: "Users were not found.",
+          });
         });
-      })
-      .catch((err) => {
-        return res.status(500).json({
-          status: false,
-          error: err,
-        });
-      });
   },
 };

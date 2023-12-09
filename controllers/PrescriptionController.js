@@ -11,12 +11,12 @@ module.exports = {
                 return res.status(200).json({
                     status: true,
                     data: prescription,
-                });
-            })
+                })})
             .catch((err) => {
+                console.log(err);
                 return res.status(500).json({
                     status: false,
-                    error: err,
+                    error: "Prescription was not found.",
                 });
             });
     },
@@ -43,8 +43,18 @@ module.exports = {
         }
 
         PrescriptionModel.create(prescription)
-            .then((data) => { res.status(201).send(data)})
-            .catch((err) => { console.log(err.message); res.status(500).end()});
+            .then((prescription) => {
+                return res.status(201).json({
+                    status: true,
+                    data: prescription,
+                })})
+            .catch((err) => {
+                console.log(err);
+                return res.status(500).json({
+                    status: false,
+                    error: "Prescription was not created.",
+                });
+            });
     },
 
     update: (req, res) => {
@@ -53,8 +63,6 @@ module.exports = {
             body: payload,
         } = req;
 
-        // IF the payload does not have any keys,
-        // THEN we can return an error, as nothing can be updated
         if (!Object.keys(payload).length) {
             return res.status(400).json({
                 status: false,
@@ -65,19 +73,16 @@ module.exports = {
         }
 
         PrescriptionModel.update({ id: prescriptionId }, payload)
-            .then(() => {
-                return PrescriptionModel.get({ id: prescriptionId });
-            })
             .then((prescription) => {
                 return res.status(200).json({
                     status: true,
-                    data: prescription.toJSON(),
-                });
-            })
+                    data: prescription,
+                })})
             .catch((err) => {
+                console.log(err);
                 return res.status(500).json({
                     status: false,
-                    error: err,
+                    error: "Prescription was not updated.",
                 });
             });
     },
@@ -97,9 +102,10 @@ module.exports = {
                 });
             })
             .catch((err) => {
+                console.log(err);
                 return res.status(500).json({
                     status: false,
-                    error: err,
+                    error: "Prescription was not deleted.",
                 });
             });
     },
@@ -110,12 +116,12 @@ module.exports = {
                 return res.status(200).json({
                     status: true,
                     data: prescriptions,
-                });
-            })
+                })})
             .catch((err) => {
+                console.log(err);
                 return res.status(500).json({
                     status: false,
-                    error: err,
+                    error: "Prescriptions were not found.",
                 });
             });
     },
