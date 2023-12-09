@@ -1,4 +1,4 @@
-INSERT INTO pharmacy.patientPrescription (patientId, prescriptionId, datePrescribed) VALUES
+INSERT INTO pharmacy.patient_prescription (patientId, prescriptionId, datePrescribed) VALUES
 (1, 1, '2015-01-01'),
 (1, 2, '2015-02-01'),
 (2, 3, '2015-03-01'),

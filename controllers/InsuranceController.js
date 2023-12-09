@@ -1,12 +1,12 @@
 const InsuranceModel = require("../models/Insurance.js");
 
 module.exports = {
-  getInsurance: (req, res) => {
+  get: (req, res) => {
     const {
       params: { insuranceId },
     } = req;
 
-    InsuranceModel.findInsurance({ id: insuranceId })
+    InsuranceModel.get({ id: insuranceId })
       .then((insurance) => {
         return res.status(200).json({
           status: true,
@@ -21,9 +21,32 @@ module.exports = {
       });
   },
 
-  updateInsurance: (req, res) => {
+  create: (req, res) => {
+    const {name, phone, address} = req.body;
+
+    if (!Object.keys(req.body).length) {
+      return res.status(400).json({
+        status: false,
+        error: {
+          message: "Body is empty, hence can not create the insurance.",
+        },
+      });
+    }
+
+    const insurance = {
+      name,
+      phone,
+      address
+    }
+
+    InsuranceModel.create(insurance)
+        .then((data) => { res.status(201).send(data)})
+        .catch((err) => { console.log(err.message); res.status(500).end()});
+  },
+
+  update: (req, res) => {
     const {
-      insurance: { insuranceId },
+      params: { insuranceId },
       body: payload,
     } = req;
 
@@ -36,9 +59,9 @@ module.exports = {
       });
     }
 
-    InsuranceModel.updateInsurance({ id: insuranceId }, payload)
+    InsuranceModel.update({ id: insuranceId }, payload)
       .then(() => {
-        return InsuranceModel.findInsurance({ id: insuranceId });
+        return InsuranceModel.get({ id: insuranceId });
       })
       .then((insurance) => {
         return res.status(200).json({
@@ -54,12 +77,12 @@ module.exports = {
       });
   },
 
-  deleteInsurance: (req, res) => {
+  delete: (req, res) => {
     const {
       params: { insuranceId },
     } = req;
 
-    InsuranceModel.deleteInsurance({ id: insuranceId })
+    InsuranceModel.delete({ id: insuranceId })
       .then((numberOfEntriesDeleted) => {
         return res.status(200).json({
           status: true,
@@ -76,8 +99,8 @@ module.exports = {
       });
   },
 
-  getAllInsurances: (req, res) => {
-    InsuranceModel.findAllInsurances(req.query)
+  getAll: (req, res) => {
+    InsuranceModel.getAll(req.query)
       .then((insurances) => {
         return res.status(200).json({
           status: true,

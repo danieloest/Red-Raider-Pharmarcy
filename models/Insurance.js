@@ -24,34 +24,35 @@ const InsuranceModel = {
 module.exports = {
     initialise: (sequelize) => {
         this.model = sequelize.define("insurance", InsuranceModel,
-            {freezeTableName: true,
-            tableName: "insurance",
+            {
+                freezeTableName: true,
+                tableName: "insurance",
             });
     },
 
-    createInsurance: (insurance) => {
+    create: (insurance) => {
         return this.model.create(insurance);
     },
 
-    findInsurance: (query) => {
+    get: (query) => {
         return this.model.findOne({
             where: query,
         });
     },
 
-    updateInsurance: (query, updatedValue) => {
+    update: (query, updatedValue) => {
         return this.model.update(updatedValue, {
             where: query,
         });
     },
 
-    findAllInsurances: (query) => {
+    getAll: (query) => {
         return this.model.findAll({
             where: query
         });
     },
 
-    deleteInsurance: (query) => {
+    delete: (query) => {
         return this.model.destroy({
             where: query
         });

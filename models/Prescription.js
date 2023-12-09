@@ -1,54 +1,44 @@
 const DataTypes = require("sequelize");
 
-const UserModel = {
+const PrescriptionModel = {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
     },
-    username: {
+    name: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
     },
-    email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-    },
-    password: {
-        type: DataTypes.STRING,
+    price: {
+        type: DataTypes.DECIMAL,
         allowNull: false,
     },
-    age: {
-        type: DataTypes.INTEGER,
+    "MaxDosage (mg)": {
+        type: DataTypes.DECIMAL,
         allowNull: false,
     },
-    firstName: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    lastName: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    role: {
-        type: DataTypes.STRING,
-        enum: ["admin", "doctor", "patient"],
-        allowNull: false
-    },
-};
+}
 
 module.exports = {
     initialise: (sequelize) => {
-        this.model = sequelize.define("user", UserModel,
-            {freezeTableName: true,
-            tableName: "user",
+        this.model = sequelize.define("prescription", PrescriptionModel, {
+                freezeTableName: true,
+                tableName: "prescription",
             });
+        },
+
+    associate: (sequelize) => {
+        this.model.belongsToMany(sequelize.model("patient"), {
+            through: 'patient_prescription',
+            foreignKey: 'prescriptionId',
+            as: 'patients',
+        });
     },
 
-    create: (user) => {
-        return this.model.create(user)
+    create: (prescription) => {
+        return this.model.create(prescription);
     },
 
     get: (query) => {
@@ -74,4 +64,5 @@ module.exports = {
             where: query
         });
     }
-};
+    
+}

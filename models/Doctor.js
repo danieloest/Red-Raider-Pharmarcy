@@ -28,35 +28,36 @@ const DoctorModel = {
 
 module.exports = {
   initialise: (sequelize) => {
-    this.model = sequelize.define("doctor", DoctorModel, {
-      freezeTableName: true,
-      tableName: "doctor",
-    });
+    this.model = sequelize.define("doctor", DoctorModel,
+        {
+          freezeTableName: true,
+          tableName: "doctor",
+        });
   },
 
-  createDoctor: (doctor) => {
+  create: (doctor) => {
     return this.model.create(doctor);
   },
 
-  findDoctor: (query) => {
+  get: (query) => {
     return this.model.findOne({
       where: query,
     });
   },
 
-  updateDoctor: (query, updatedValue) => {
+  update: (query, updatedValue) => {
     return this.model.update(updatedValue, {
       where: query,
     });
   },
 
-  findAllDoctors: (query) => {
+  getAll: (query) => {
     return this.model.findAll({
       where: query,
     });
   },
 
-  deleteDoctor: (query) => {
+  delete: (query) => {
     return this.model.destroy({
       where: query,
     });

@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "Users",
+			"name": "User",
 			"item": [
 				{
 					"name": "All",
@@ -31,6 +31,58 @@
 					"request": {
 						"method": "GET",
 						"header": [],
+						"url": {
+							"raw": "{{userBaseUrl}}/{{userId}}",
+							"host": [
+								"{{userBaseUrl}}"
+							],
+							"path": [
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "One",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"Postman\",\n    \"email\": \"postman@email.com\",\n    \"password\": \"postmanPassword\",\n    \"age\": 23,\n    \"firstName\": \"Post\",\n    \"lastName\": \"Man\",\n    \"role\": \"admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{userBaseUrl}}/",
+							"host": [
+								"{{userBaseUrl}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "One",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"Postman\",\n    \"email\": \"postman@email.com\",\n    \"password\": \"postmanPassword\",\n    \"age\": 23,\n    \"firstName\": \"Post\",\n    \"lastName\": \"Man\",\n    \"role\": \"admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{userBaseUrl}}/{{userId}}",
 							"host": [
@@ -83,7 +135,7 @@
 			]
 		},
 		{
-			"name": "Doctors",
+			"name": "Doctor",
 			"item": [
 				{
 					"name": "All",
@@ -108,14 +160,63 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/doctor/{{doctorId}}",
-							"protocol": "http",
+							"raw": "{{doctorBaseUrl}}/{{doctorId}}",
 							"host": [
-								"localhost"
+								"{{doctorBaseUrl}}"
 							],
-							"port": "8080",
 							"path": [
-								"doctor",
+								"{{doctorId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "One",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"firstName\": \"Dr. Post\",\n    \"lastName\": \"Man\",\n    \"email\": \"post.man@email.com\",\n    \"address\": \"123 Post St\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{doctorBaseUrl}}/",
+							"host": [
+								"{{doctorBaseUrl}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "One",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"firstName\": \"Dr. Post\",\n    \"lastName\": \"Man\",\n    \"email\": \"post.man@email.com\",\n    \"address\": \"123 Post St\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{doctorBaseUrl}}/{{doctorId}}",
+							"host": [
+								"{{doctorBaseUrl}}"
+							],
+							"path": [
 								"{{doctorId}}"
 							]
 						}
@@ -134,6 +235,114 @@
 							],
 							"path": [
 								"{{doctorId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Prescription",
+			"item": [
+				{
+					"name": "All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{prescriptionBaseUrl}}/",
+							"host": [
+								"{{prescriptionBaseUrl}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "One",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{prescriptionBaseUrl}}/{{prescriptionId}}",
+							"host": [
+								"{{prescriptionBaseUrl}}"
+							],
+							"path": [
+								"{{prescriptionId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "One",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Postman\",\n    \"price\": \"1.99\",\n    \"MaxDosage (mg)\": \"1.00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{prescriptionBaseUrl}}/",
+							"host": [
+								"{{prescriptionBaseUrl}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "One",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Postman\",\n    \"price\": \"1.99\",\n    \"MaxDosage (mg)\": \"1.00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{prescriptionBaseUrl}}/{{prescriptionId}}",
+							"host": [
+								"{{prescriptionBaseUrl}}"
+							],
+							"path": [
+								"{{prescriptionId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "One",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{prescriptionBaseUrl}}/{{prescriptionId}}",
+							"host": [
+								"{{prescriptionBaseUrl}}"
+							],
+							"path": [
+								"{{prescriptionId}}"
 							]
 						}
 					},
@@ -181,6 +390,58 @@
 				{
 					"name": "One",
 					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Postman Insurance\",\n    \"phone\": \"123-456-7890\",\n    \"address\": \"234 Post St\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{insuranceBaseUrl}}/",
+							"host": [
+								"{{insuranceBaseUrl}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "One",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Postman Insurance\",\n    \"phone\": \"123-456-7890\",\n    \"address\": \"234 Post St\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{insuranceBaseUrl}}/{{insuranceId}}",
+							"host": [
+								"{{insuranceBaseUrl}}"
+							],
+							"path": [
+								"{{insuranceId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "One",
+					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
@@ -198,7 +459,7 @@
 			]
 		},
 		{
-			"name": "Patients",
+			"name": "Patient",
 			"item": [
 				{
 					"name": "All",
@@ -237,6 +498,58 @@
 				{
 					"name": "One",
 					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"Post\",\n    \"lastName\": \"Man\",\n    \"email\": \"post.man@email.com\",\n    \"phone\": \"123-321-4567\",\n    \"address\": \"987 Post St.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{patientBaseUrl}}/",
+							"host": [
+								"{{patientBaseUrl}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "One",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"Post\",\n    \"lastName\": \"Man\",\n    \"email\": \"post.man@email.com\",\n    \"phone\": \"123-321-4567\",\n    \"address\": \"987 Post St.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{patientBaseUrl}}/{{patientId}}",
+							"host": [
+								"{{patientBaseUrl}}"
+							],
+							"path": [
+								"{{patientId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "One",
+					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
@@ -254,25 +567,6 @@
 			]
 		},
 		{
-			"name": "Doctors",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/doctors",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"doctors"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Status",
 			"request": {
 				"method": "GET",
@@ -286,44 +580,6 @@
 					"port": "8080",
 					"path": [
 						"status"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Patients",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/patients",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"patients"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Prescriptions",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/prescriptions",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"prescriptions"
 					]
 				}
 			},
@@ -364,25 +620,6 @@
 					"path": [
 						"patient",
 						"doctors"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Insurance",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/insurance",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"insurance"
 					]
 				}
 			},
@@ -448,6 +685,16 @@
 		},
 		{
 			"key": "patientId",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "prescriptionBaseUrl",
+			"value": "http://localhost:8080/prescription",
+			"type": "string"
+		},
+		{
+			"key": "prescriptionId",
 			"value": "1",
 			"type": "string"
 		}

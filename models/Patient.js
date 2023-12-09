@@ -27,12 +27,6 @@ const PatientModel = {
   address: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true,
-  },
-  insuranceId: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    primaryKey: true,
   },
 };
 
@@ -45,47 +39,52 @@ module.exports = {
             as: "insurance",
             model: sequelize.model("insurance"),
           },
+          {
+            as: "doctors",
+            model: sequelize.model("doctor"),
+          },
+          {
+            as: "prescriptions",
+            model: sequelize.model("prescription"),
+          },
         ],
       },
       freezeTableName: true,
       tableName: "patient",
     });
-    this.model.belongsTo(sequelize.model("insurance"));
   },
 
-  createPatient: (patient) => {
-    return this.model.create({
-      firstName: patient.firstName,
-      lastName: patient.lastName,
-      email: patient.email,
-      phone: patient.phone,
-      address: patient.address,
-      insuranceId: parseInt(patient.insuranceId),
+  associate: (sequelize) => {
+    this.model.belongsTo(sequelize.model("insurance"));
+    this.model.belongsToMany(sequelize.model("prescription"), {
+      through: "patient_prescription",
+      foreignKey: "patientId",
+      as: "prescriptions",
+    });
+    this.model.belongsToMany(sequelize.model("doctor"), {
+      through: "patient_doctor",
+      foreignKey: "patientId",
+      as: "doctors",
     });
   },
 
-  findPatient: (query) => {
+  create: (patient) => {
+    return this.model.create(patient);
+  },
+
+  get: (query) => {
     return this.model.findOne({
       where: query,
     });
   },
 
-  updatePatient: (query, updatedValue) => {
+  update: (query, updatedValue) => {
     return this.model.update(updatedValue, {
       where: query,
     });
   },
 
-  findAllPatients: (query) => {
-    // Request from Postman
-    if (Object.keys(query).length === 0) {
-      return this.model.findAll({
-        where: query,
-      });
-    }
-    console.log("query in model: ");
-    console.log(query);
-    // Request from site
+  getAll: (query) => {
     return this.model.findAll({
       // where: query,
       where: {
@@ -100,7 +99,7 @@ module.exports = {
     });
   },
 
-  deletePatient: (query) => {
+  delete: (query) => {
     return this.model.destroy({
       where: query,
     });

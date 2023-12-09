@@ -1,13 +1,32 @@
 const express = require("express");
 const DoctorController = require("../controllers/DoctorController.js");
+const UserPermission = require("../middleware/UserPermission");
 const router = express.Router();
 
-router.get("/:doctorId", DoctorController.getDoctor);
+router.get(
+    "/:doctorId",
+    DoctorController.get
+);
 
-router.get("/", DoctorController.getAllDoctors);
+router.get(
+    "/",
+    [UserPermission.checkPermission('admin')],
+    DoctorController.getAll
+);
 
-router.patch("/", DoctorController.updateDoctor);
+router.post(
+    "/",
+    DoctorController.create,
+);
 
-router.delete("/:doctorId", DoctorController.deleteDoctor);
+router.patch(
+    "/:doctorId",
+    DoctorController.update
+);
+
+router.delete(
+    "/:doctorId",
+    DoctorController.delete
+);
 
 module.exports = router;

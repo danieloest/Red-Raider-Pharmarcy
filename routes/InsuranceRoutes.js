@@ -5,24 +5,29 @@ const router = express.Router();
 
 router.get(
     "/:insuranceId",
-    InsuranceController.getInsurance
+    InsuranceController.get
     );
 
 router.get(
     "/",
     [UserPermission.checkPermission('admin')],
-    InsuranceController.getAllInsurances
+    InsuranceController.getAll
+);
+
+router.post(
+    "/",
+    InsuranceController.create,
 );
 
 router.patch(
-    "/",
-    InsuranceController.updateInsurance
+    "/:insuranceId",
+    InsuranceController.update
 );
 
 router.delete(
     "/:insuranceId",
     [UserPermission.checkPermission('admin')],
-    InsuranceController.deleteInsurance
+    InsuranceController.delete
 )
 
 module.exports = router;

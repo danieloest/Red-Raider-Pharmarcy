@@ -5,24 +5,29 @@ const router = express.Router();
 
 router.get(
     "/:userId",
-    UserController.getUser
+    UserController.get
 );
 
 router.get(
     "/",
     [UserPermission.checkPermission('admin')],
-    UserController.getAllUsers
+    UserController.getAll
+);
+
+router.post(
+    "/",
+    UserController.create,
 );
 
 router.patch(
-    "/",
-    UserController.updateUser
+    "/:userId",
+    UserController.update
 );
 
 router.delete(
     "/:userId",
     [UserPermission.checkPermission('admin')],
-    UserController.deleteUser
+    UserController.delete
 );
 
 module.exports = router;

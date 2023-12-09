@@ -3,12 +3,12 @@ const PatientModel = require("../models/Patient");
 const InsuranceModel = require("../models/Insurance");
 
 module.exports = {
-  getPatient: (req, res) => {
+  get: (req, res) => {
     const {
       params: { patientId },
     } = req;
 
-    PatientModel.findPatient({ id: patientId })
+    PatientModel.get({ id: patientId })
       .then((patient) => {
         return res.status(200).json({
           status: true,
@@ -23,66 +23,39 @@ module.exports = {
       });
   },
 
-  createPatient: (req, res) => {
-    // If the request comes from the website
-    if (Object.keys(req.query).length === 0) {
-      newPatient = {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        phone: req.body.phone,
-        address: req.body.address,
-        insuranceId: req.body.insuranceId,
-      };
+  create: (req, res) => {
+    const { firstName, lastName, email, phone, address } = req.body;
+
+    if (!Object.keys(req.body).length) {
+      return res.status(400).json({
+        status: false,
+        error: {
+          message: "Body is empty, hence can not create the patient.",
+        },
+      });
     }
-    // If the command comes from Postman
-    else {
-      newPatient = req.query;
-    }
-    PatientModel.createPatient(newPatient)
-      .then((patient) => {
-        // For website
-        if (Object.keys(req.query).length === 0) {
-          var insurances_promise = InsuranceModel.findInsurance(
-            patient.dataValues.insuranceId
-          );
-          insurances_promise.then((insurances) => {
-            patient.dataValues.insurance = insurances.dataValues.name;
-            return res.render("newPatientConfirmation.ejs", { patient });
-          });
-        }
-        // For Postman
-        else {
-          return res.status(200).json({
-            status: true,
-            data: patient.toJSON(),
-          });
-        }
+
+    const patient = {
+      firstName,
+      lastName,
+      email,
+      phone,
+      address,
+    };
+
+    PatientModel.create(patient)
+      .then((data) => {
+        res.status(201).send(data);
       })
       .catch((err) => {
-        // return res.status(500).json({
-        //   status: false,
-        //   error: err,
-        // });
-        // For website
-        if (Object.keys(req.query).length === 0) {
-          return res.render("errorPage.ejs", {
-            errorMessage: "There was an error creating the patient.",
-          });
-        }
-        // For Postman
-        else {
-          return res.status(500).json({
-            status: false,
-            error: err,
-          });
-        }
+        console.log(err.message);
+        res.status(500).end();
       });
   },
 
-  updatePatient: (req, res) => {
+  update: (req, res) => {
     const {
-      patient: { patientId },
+      params: { patientId },
       body: payload,
     } = req;
 
@@ -97,9 +70,9 @@ module.exports = {
       });
     }
 
-    PatientModel.updatePatient({ id: patientId }, payload)
+    PatientModel.update({ id: patientId }, payload)
       .then(() => {
-        return PatientModel.findPatient({ id: patientId });
+        return PatientModel.get({ id: patientId });
       })
       .then((patient) => {
         return res.status(200).json({
@@ -115,12 +88,12 @@ module.exports = {
       });
   },
 
-  deletePatient: (req, res) => {
+  delete: (req, res) => {
     const {
       params: { patientId },
     } = req;
 
-    PatientModel.deletePatient({ id: patientId })
+    PatientModel.delete({ id: patientId })
       .then((numberOfEntriesDeleted) => {
         return res.status(200).json({
           status: true,
@@ -137,8 +110,8 @@ module.exports = {
       });
   },
 
-  getAllPatients: (req, res) => {
-    PatientModel.findAllPatients(req.query)
+  getAll: (req, res) => {
+    PatientModel.getAll(req.query)
       .then((patients) => {
         return res.status(200).json({
           status: true,
