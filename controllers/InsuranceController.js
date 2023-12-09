@@ -13,10 +13,10 @@ module.exports = {
           data: insurance,
         });
       })
-      .catch((err) => {
+      .catch(() => {
         return res.status(500).json({
           status: false,
-          error: err,
+          error: "Insurance does not exist",
         });
       });
   },

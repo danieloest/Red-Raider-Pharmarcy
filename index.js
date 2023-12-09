@@ -12,6 +12,8 @@ const InsuranceModel = require("./models/Insurance");
 const PrescriptionModel = require("./models/Prescription");
 const PatientModel = require("./models/Patient");
 const { Sequelize } = require("sequelize");
+const PatientDoctorModel = require("./models/PatientDoctor");
+const PatientPrescriptionModel = require("./models/PatientPrescription");
 
 const app = express();
 app.set("view engine", "ejs");
@@ -21,6 +23,7 @@ const port = 8080;
 
 app.use(express.json());
 
+// Initialising Sequelize ORM
 const sequelize = new Sequelize({
   database: process.env.MYSQL_DATABASE,
   username: process.env.MYSQL_USERNAME,
@@ -32,7 +35,7 @@ const sequelize = new Sequelize({
     logQueryParameters: true
 });
 
-// Initialising the Models on sequelize
+// Initialising the Models on sequelize ORM
 UserModel.initialise(sequelize);
 DoctorModel.initialise(sequelize);
 InsuranceModel.initialise(sequelize);
@@ -40,9 +43,9 @@ PrescriptionModel.initialise(sequelize);
 PatientModel.initialise(sequelize);
 PrescriptionModel.associate(sequelize);
 PatientModel.associate(sequelize);
+PatientDoctorModel.initialise(sequelize);
+PatientPrescriptionModel.initialise(sequelize);
 
-// Syncing the models that are defined on sequelize with the tables that already exists
-// in the database. It creates models as tables that do not exist in the DB.
 sequelize
   .sync()
   .then(() => {
@@ -77,4 +80,3 @@ app.get("/login", (req, res) => {
 });
 
 app.use(express.static("public"));
-

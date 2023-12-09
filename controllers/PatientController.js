@@ -1,4 +1,7 @@
 const PatientModel = require("../models/Patient");
+const InsuranceModel = require("../models/Insurance");
+const PatientDoctorModel = require("../models/PatientDoctor");
+const PatientPrescriptionModel = require("../models/PatientPrescription");
 
 module.exports = {
   get: (req, res) => {
@@ -22,7 +25,7 @@ module.exports = {
   },
 
   create: (req, res) => {
-    const {firstName, lastName, email, phone, address} = req.body;
+    const {firstName, lastName, email, phone, address, insuranceId} = req.body;
 
     if (!Object.keys(req.body).length) {
       return res.status(400).json({
@@ -38,12 +41,27 @@ module.exports = {
       lastName,
       email,
       phone,
-      address
+      address,
+      insuranceId
     }
 
-    PatientModel.create(patient)
-        .then((data) => { res.status(201).send(data)})
-        .catch((err) => { console.log(err.message); res.status(500).end()});
+    InsuranceModel.get( {id: insuranceId} )
+        .then(
+            PatientModel.create(patient, {insuranceId: insuranceId})
+                .then((data) => {
+                  res.status(201).send(data)
+                })
+                .catch((err) => {
+                  console.log(err.message);
+                  res.status(500).end()
+                })
+        )
+        .catch(() => {
+          return res.status(500).json({
+            status: false,
+            error: "Insurance does not exist",
+          });
+        })
   },
 
   update: (req, res) => {
@@ -52,8 +70,6 @@ module.exports = {
       body: payload,
     } = req;
 
-    // IF the payload does not have any keys,
-    // THEN we can return an error, as nothing can be updated
     if (!Object.keys(payload).length) {
       return res.status(400).json({
         status: false,
@@ -117,5 +133,83 @@ module.exports = {
           error: err,
         });
       });
+  },
+
+  addDoctor: (req, res) => {
+    const {
+      params: { patientId },
+      body: payload,
+    } = req;
+
+    if (!Object.keys(payload).length) {
+      return res.status(400).json({
+        status: false,
+        error: {
+          message: "Body is empty, hence can not add doctors to the patient.",
+        },
+      });
+    }
+
+    const doctorId = payload.doctorId;
+
+    const patientDoctor = {
+      patientId,
+      doctorId,
+    };
+
+    PatientDoctorModel.findOrCreate(patientDoctor)
+        .then(([data]) => {
+          res.status(201).json({
+            status: true,
+            data: data
+          });
+        })
+        .catch(() => {
+          res.status(500).json({
+            status: false,
+            error: {
+              message: "Patient or Doctor does not exist.",
+            },
+          })
+        });
+  },
+
+  addPrescription: (req, res) => {
+    const {
+      params: { patientId },
+      body: payload,
+    } = req;
+
+    if (!Object.keys(payload).length) {
+      return res.status(400).json({
+        status: false,
+        error: {
+          message: "Body is empty, hence can not add doctors to the patient.",
+        },
+      });
+    }
+
+    const prescriptionId = payload.prescriptionId;
+
+    const patientPrescription = {
+      patientId,
+      prescriptionId,
+    };
+
+    PatientPrescriptionModel.findOrCreate(patientPrescription)
+        .then(([data]) => {
+          res.status(201).json({
+            status: true,
+            data: data
+          });
+        })
+        .catch(() => {
+          res.status(500).json({
+            status: false,
+            error: {
+              message: "Patient or Prescription does not exist.",
+            },
+          })
+        });
   },
 };
