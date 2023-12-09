@@ -6,7 +6,7 @@ module.exports = {
             params: { prescriptionId },
         } = req;
 
-        PrescriptionModel.get({ id: prescriptionId })
+        PrescriptionModel.get(prescriptionId)
             .then((prescription) => {
                 return res.status(200).json({
                     status: true,

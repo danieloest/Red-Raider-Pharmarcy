@@ -6,7 +6,7 @@ module.exports = {
       params: { doctorId },
     } = req;
 
-    DoctorModel.get({ id: doctorId })
+    DoctorModel.get(doctorId)
         .then((doctor) => {
               return res.status(200).json({
                 status: true,
@@ -71,7 +71,7 @@ module.exports = {
 
     DoctorModel.update({ id: doctorId }, payload)
       .then(() => {
-        return DoctorModel.get({ id: doctorId });
+        return DoctorModel.get(doctorId);
       })
         .then((doctor) => {
           return res.status(200).json({

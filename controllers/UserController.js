@@ -6,7 +6,7 @@ module.exports = {
       params: { userId },
     } = req;
 
-    UserModel.get({ id: userId })
+    UserModel.get(userId)
         .then((user) => {
           return res.status(200).json({
             status: true,
