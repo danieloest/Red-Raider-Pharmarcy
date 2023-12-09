@@ -376,12 +376,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{insuranceBaseUrl}}/432343",
+							"raw": "{{insuranceBaseUrl}}/{{insuranceId}}",
 							"host": [
 								"{{insuranceBaseUrl}}"
 							],
 							"path": [
-								"432343"
+								"{{insuranceId}}"
 							]
 						}
 					},

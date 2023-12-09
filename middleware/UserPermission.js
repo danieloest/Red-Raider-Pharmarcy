@@ -6,7 +6,7 @@ module.exports = {
         return (req, res, next) => {
             const userId = req.get("userId");
 
-            UserModel.get({ id: userId })
+            UserModel.get(userId)
                 .then((user) => {
                     if (!user) {
                         return res.status(403).json({

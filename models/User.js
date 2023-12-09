@@ -51,10 +51,8 @@ module.exports = {
         return this.model.create(user)
     },
 
-    get: (query) => {
-        return this.model.findOne({
-            where: query,
-        });
+    get: (id) => {
+        return this.model.findByPk(id);
     },
 
     update: (query, updatedValue) => {

@@ -9,7 +9,7 @@ module.exports = {
       params: { patientId },
     } = req;
 
-    PatientModel.get({ id: patientId } )
+    PatientModel.get(patientId)
         .then((patient) => {
           return res.status(200).json({
             status: true,
@@ -45,7 +45,7 @@ module.exports = {
       insuranceId
     }
 
-    InsuranceModel.get( {id: insuranceId} )
+    InsuranceModel.get( insuranceId)
         .then(
             PatientModel.create(patient, {insuranceId: insuranceId})
                 .then((patient) => {

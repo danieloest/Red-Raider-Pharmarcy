@@ -6,7 +6,7 @@ module.exports = {
       params: { insuranceId },
     } = req;
 
-    InsuranceModel.get({ id: insuranceId })
+    InsuranceModel.get(insuranceId)
         .then((insurance) => {
           return res.status(200).json({
             status: true,
@@ -71,7 +71,7 @@ module.exports = {
 
     InsuranceModel.update({ id: insuranceId }, payload)
       .then(() => {
-        return InsuranceModel.get({ id: insuranceId });
+        return InsuranceModel.get(insuranceId);
       })
         .then((insurance) => {
           return res.status(200).json({
