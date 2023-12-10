@@ -7,15 +7,37 @@ router.get("/:patientId", PatientController.get);
 
 router.get(
   "/",
-  // Commented out the permissions so that it would work on the website
-  //   [UserPermission.checkPermission("admin")],
+  // [UserPermission.checkPermission('admin')],
   PatientController.getAll
 );
 
 router.post("/", PatientController.create);
 
-router.patch("/:patientId", PatientController.update);
+router.patch(
+  "/:patientId",
+  // [UserPermission.checkPermission('admin')],
+  PatientController.update
+);
 
-router.delete("/:patientId", PatientController.delete);
+/*
+Commented out b/c use case is not valid.
+Do not want to delete records and potentially orphan data as a result
+router.delete(
+    "/:patientId",
+    PatientController.delete,
+);
+ */
+
+router.post(
+  "/:patientId/doctor",
+  // [UserPermission.checkPermission('admin')],
+  PatientController.addDoctor
+);
+
+router.post(
+  "/:patientId/prescription",
+  //   [UserPermission.checkPermission("admin")],
+  PatientController.addPrescription
+);
 
 module.exports = router;

@@ -21,6 +21,7 @@ router.post(
 
 router.patch(
     "/:userId",
+    [UserPermission.checkPermission('admin')],
     UserController.update
 );
 

@@ -72,10 +72,8 @@ module.exports = {
     return this.model.create(patient);
   },
 
-  get: (query) => {
-    return this.model.findOne({
-      where: query,
-    });
+  get: (id) => {
+    return this.model.findByPk(id);
   },
 
   update: (query, updatedValue) => {

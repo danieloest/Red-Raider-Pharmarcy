@@ -222,23 +222,6 @@
 						}
 					},
 					"response": []
-				},
-				{
-					"name": "One",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{doctorBaseUrl}}/{{doctorId}}",
-							"host": [
-								"{{doctorBaseUrl}}"
-							],
-							"path": [
-								"{{doctorId}}"
-							]
-						}
-					},
-					"response": []
 				}
 			]
 		},
@@ -319,23 +302,6 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{prescriptionBaseUrl}}/{{prescriptionId}}",
-							"host": [
-								"{{prescriptionBaseUrl}}"
-							],
-							"path": [
-								"{{prescriptionId}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "One",
-					"request": {
-						"method": "DELETE",
-						"header": [],
 						"url": {
 							"raw": "{{prescriptionBaseUrl}}/{{prescriptionId}}",
 							"host": [
@@ -438,23 +404,6 @@
 						}
 					},
 					"response": []
-				},
-				{
-					"name": "One",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{insuranceBaseUrl}}/{{insuranceId}}",
-							"host": [
-								"{{insuranceBaseUrl}}"
-							],
-							"path": [
-								"{{insuranceId}}"
-							]
-						}
-					},
-					"response": []
 				}
 			]
 		},
@@ -502,7 +451,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"firstName\": \"Post\",\n    \"lastName\": \"Man\",\n    \"email\": \"post.man@email.com\",\n    \"phone\": \"123-321-4567\",\n    \"address\": \"987 Post St.\"\n}",
+							"raw": "{\n    \"firstName\": \"Post\",\n    \"lastName\": \"Man\",\n    \"email\": \"post.man@email.com\",\n    \"phone\": \"123-321-4567\",\n    \"address\": \"987 Post St.\",\n    \"insuranceId\": 1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -516,6 +465,60 @@
 							],
 							"path": [
 								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "One Doctor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"doctorId\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{patientBaseUrl}}/{{patientId}}/doctor",
+							"host": [
+								"{{patientBaseUrl}}"
+							],
+							"path": [
+								"{{patientId}}",
+								"doctor"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "One Prescription",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"prescriptionId\": 11,\n    \"datePrescribed\": \"2023-11-20\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{patientBaseUrl}}/{{patientId}}/prescription",
+							"host": [
+								"{{patientBaseUrl}}"
+							],
+							"path": [
+								"{{patientId}}",
+								"prescription"
 							]
 						}
 					},
@@ -546,23 +549,6 @@
 						}
 					},
 					"response": []
-				},
-				{
-					"name": "One",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{insuranceBaseUrl}}/{{insuranceId}}",
-							"host": [
-								"{{insuranceBaseUrl}}"
-							],
-							"path": [
-								"{{insuranceId}}"
-							]
-						}
-					},
-					"response": []
 				}
 			]
 		},
@@ -580,46 +566,6 @@
 					"port": "8080",
 					"path": [
 						"status"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Patient Prescriptions",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/patient/prescriptions",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"patient",
-						"prescriptions"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Patient Doctors",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/patient/doctors",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"patient",
-						"doctors"
 					]
 				}
 			},

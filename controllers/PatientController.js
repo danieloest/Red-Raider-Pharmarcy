@@ -1,6 +1,7 @@
 const PatientModel = require("../models/Patient");
-// Used to get the name of the patient's insurance to send in the Create Patient response
 const InsuranceModel = require("../models/Insurance");
+const PatientDoctorModel = require("../models/PatientDoctor");
+const PatientPrescriptionModel = require("../models/PatientPrescription");
 
 module.exports = {
   get: (req, res) => {
@@ -8,7 +9,7 @@ module.exports = {
       params: { patientId },
     } = req;
 
-    PatientModel.get({ id: patientId })
+    PatientModel.get(patientId)
       .then((patient) => {
         return res.status(200).json({
           status: true,
@@ -16,15 +17,17 @@ module.exports = {
         });
       })
       .catch((err) => {
+        console.log(err);
         return res.status(500).json({
           status: false,
-          error: err,
+          error: "Patient was not found.",
         });
       });
   },
 
   create: (req, res) => {
-    const { firstName, lastName, email, phone, address } = req.body;
+    const { firstName, lastName, email, phone, address, insuranceId } =
+      req.body;
 
     if (!Object.keys(req.body).length) {
       return res.status(400).json({
@@ -41,16 +44,31 @@ module.exports = {
       email,
       phone,
       address,
+      insuranceId,
     };
 
-    PatientModel.create(patient)
-      .then((data) => {
-        return res.render("newPatientConfirmation.ejs", { data });
-        // res.status(201).send(data);
-      })
-      .catch((err) => {
-        console.log(err.message);
-        res.status(500).end();
+    InsuranceModel.get(insuranceId)
+      .then(
+        PatientModel.create(patient, { insuranceId: insuranceId })
+          .then((patient) => {
+            return res.status(201).json({
+              status: true,
+              data: patient,
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+            return res.status(500).json({
+              status: false,
+              error: "Patient was not created.",
+            });
+          })
+      )
+      .catch(() => {
+        return res.status(500).json({
+          status: false,
+          error: "Insurance does not exist",
+        });
       });
   },
 
@@ -60,8 +78,6 @@ module.exports = {
       body: payload,
     } = req;
 
-    // IF the payload does not have any keys,
-    // THEN we can return an error, as nothing can be updated
     if (!Object.keys(payload).length) {
       return res.status(400).json({
         status: false,
@@ -72,19 +88,17 @@ module.exports = {
     }
 
     PatientModel.update({ id: patientId }, payload)
-      .then(() => {
-        return PatientModel.get({ id: patientId });
-      })
       .then((patient) => {
         return res.status(200).json({
           status: true,
-          data: patient.toJSON(),
+          data: patient,
         });
       })
       .catch((err) => {
+        console.log(err);
         return res.status(500).json({
           status: false,
-          error: err,
+          error: "Patient was not updated.",
         });
       });
   },
@@ -104,9 +118,10 @@ module.exports = {
         });
       })
       .catch((err) => {
+        console.log(err);
         return res.status(500).json({
           status: false,
-          error: err,
+          error: "Patient was not deleted.",
         });
       });
   },
@@ -120,9 +135,92 @@ module.exports = {
         });
       })
       .catch((err) => {
+        console.log(err);
         return res.status(500).json({
           status: false,
-          error: err,
+          error: "Patients were not found.",
+        });
+      });
+  },
+
+  addDoctor: (req, res) => {
+    const {
+      params: { patientId },
+      body: payload,
+    } = req;
+
+    if (!Object.keys(payload).length) {
+      return res.status(400).json({
+        status: false,
+        error: {
+          message: "Body is empty, hence can not add doctors to the patient.",
+        },
+      });
+    }
+
+    const doctorId = payload.doctorId;
+
+    const patientDoctor = {
+      patientId,
+      doctorId,
+    };
+
+    PatientDoctorModel.findOrCreate(patientDoctor)
+      .then(([data]) => {
+        res.status(201).json({
+          status: true,
+          data: data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json({
+          status: false,
+          error: {
+            message: "Patient or Doctor does not exist.",
+          },
+        });
+      });
+  },
+
+  addPrescription: (req, res) => {
+    const {
+      params: { patientId },
+      body: payload,
+    } = req;
+
+    if (!Object.keys(payload).length) {
+      return res.status(400).json({
+        status: false,
+        error: {
+          message: "Body is empty, hence can not add doctors to the patient.",
+        },
+      });
+    }
+
+    const prescriptionId = payload.prescriptionId;
+    const datePrescribed = payload.datePrescribed;
+
+    const patientPrescription = {
+      patientId,
+      prescriptionId,
+      datePrescribed,
+    };
+
+    PatientPrescriptionModel.findOrCreate(patientPrescription)
+      .then(([data]) => {
+        res.status(201).json({
+          status: true,
+          data: data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json({
+          status: false,
+          error: {
+            message: "Patient or Prescription does not exist.",
+          },
         });
       });
   },
