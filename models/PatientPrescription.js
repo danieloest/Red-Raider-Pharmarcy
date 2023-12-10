@@ -8,6 +8,9 @@ const PatientPrescriptionModel = {
     prescriptionId: {
         type: DataTypes.INTEGER,
         primaryKey: true,
+    },
+    datePrescribed: {
+        type: DataTypes.DATE,
     }
 }
 module.exports = {
@@ -22,6 +25,7 @@ module.exports = {
     findOrCreate: (patientPrescription) => {
         let patientId = patientPrescription.patientId;
         let prescriptionId = patientPrescription.prescriptionId;
+        let datePrescribed = patientPrescription.datePrescribed;
         return this.model.findOrCreate({
             where: {
                 patientId: patientId,
@@ -29,7 +33,8 @@ module.exports = {
             },
             defaults: {
                 patientId: patientId,
-                PrescriptionId: prescriptionId,
+                prescriptionId: prescriptionId,
+                datePrescribed: datePrescribed,
             }
         })
     },

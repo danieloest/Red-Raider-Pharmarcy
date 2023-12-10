@@ -21,13 +21,18 @@ router.post(
 
 router.patch(
     "/:insuranceId",
+    [UserPermission.checkPermission('admin')],
     InsuranceController.update
 );
 
+/*
+Commented out b/c use case is not valid.
+Do not want to delete records and potentially orphan data as a result
 router.delete(
     "/:insuranceId",
     [UserPermission.checkPermission('admin')],
     InsuranceController.delete
 )
+ */
 
 module.exports = router;

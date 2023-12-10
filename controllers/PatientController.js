@@ -194,10 +194,12 @@ module.exports = {
     }
 
     const prescriptionId = payload.prescriptionId;
+    const datePrescribed = payload.datePrescribed;
 
     const patientPrescription = {
-      patientId,
-      prescriptionId,
+        patientId,
+        prescriptionId,
+        datePrescribed,
     };
 
     PatientPrescriptionModel.findOrCreate(patientPrescription)

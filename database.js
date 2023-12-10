@@ -24,6 +24,8 @@ const liquibase = new Liquibase(liquibaseConfig);
 
 async function initLiquibase() {
     try {
+        console.log("Release lock for Liquibase to avoid potential deadlock")
+        await liquibase.releaseLocks();
         console.log("Dropping database")
         await liquibase.dropAll();
         console.log("Running liquibase changes")

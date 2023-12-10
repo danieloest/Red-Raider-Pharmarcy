@@ -46,3 +46,8 @@ See process below:
 - Create liquibase migration to run sql insert statements as part of migration. ex. `changelog-0003.yaml`
 
 
+## Sequelize
+
+[Sequelize](https://sequelize.org/) is leveraged as the ORM (Object Relational Mapping) to tie sync the 
+schema of models with the database. Sequelize provides functionality to access, update, and delete records
+that could be tied together with a repository pattern or abstracting direct SQL queries.

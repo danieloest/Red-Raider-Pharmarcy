@@ -32,7 +32,6 @@ const sequelize = new Sequelize({
   define: {
     timestamps: false,
   },
-    logQueryParameters: true
 });
 
 // Initialising the Models on sequelize ORM
