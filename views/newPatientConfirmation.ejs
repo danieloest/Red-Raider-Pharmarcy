@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello, world!</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="" />
+    <link rel="icon" href="favicon.png" />
+    <link href="/../bootstrap.min.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container mt-5 mb-5">
+      <div class="row d-flex justify-content-center">
+        <div class="col-md-8">
+          <div class="card">
+            <div class="text-left logo p-2 px-5">
+              <img src="/../pharmacy_logo.svg" width="50" />
+            </div>
+
+            <div class="invoice p-5">
+              <h5>New patient created!</h5>
+
+              <div
+                class="payment border-top mt-3 mb-3 border-bottom table-responsive"
+              >
+                <table class="table table-borderless">
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div class="py-2">
+                          <span class="d-block text-muted">Action Date</span>
+                          <span></span>
+                            <%= new Date().toLocaleString('default', {month:
+                            'long'}); %> <%= new Date().getDate() %>,<%= new
+                            Date().getFullYear(); %></span
+                          >
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="product border-bottom table-responsive">
+                <table class="table table-borderless">
+                  <tbody>
+                    <!-- patient's name -->
+                    <tr>
+                      <td width="60%">
+                        <span class="font-weight-bold">Patient's name</span>
+                      </td>
+                      <td width="20%">
+                        <div class="text-right">
+                          <span class="font-weight-bold"><%= patient.dataValues.firstName + " " + patient.dataValues.lastName %></span>
+                        </div>
+                      </td>
+                    </tr>
+                    <!-- patient's email -->
+                    <tr>
+                        <td width="60%">
+                          <span class="font-weight-bold">Patient's email</span>
+                        </td>
+                        <td width="20%">
+                          <div class="text-right">
+                            <span class="font-weight-bold"><%= patient.dataValues.email%></span>
+                          </div>
+                        </td>
+                      </tr>
+
+                    <!-- patient's phone number -->
+                    <tr>
+                        <td width="60%">
+                          <span class="font-weight-bold">Patient's phone number</span>
+                        </td>
+                        <td width="20%">
+                          <div class="text-right">
+                            <span class="font-weight-bold"><%= patient.dataValues.phone %></span>
+                          </div>
+                        </td>
+                      </tr>
+
+                    <!-- patient's address -->
+                    <tr>
+                        <td width="60%">
+                          <span class="font-weight-bold">Patient's address</span>
+                        </td>
+                        <td width="20%">
+                          <div class="text-right">
+                            <span class="font-weight-bold"><%= patient.dataValues.address %></span>
+                          </div>
+                        </td>
+                      </tr>
+
+                    <!-- patient's insurance -->
+                    <tr>
+                        <td width="60%">
+                          <span class="font-weight-bold">Patient's insurance</span>
+                        </td>
+                        <td width="20%">
+                          <div class="text-right">
+                            <% console.log(patient) %>
+                            <span class="font-weight-bold"><%= patient.dataValues.insurance %></span>
+                          </div>
+                        </td>
+                      </tr>
+
+                  </tbody>
+                </table>
+              </div>
+              <p>
+                The new patient is now in the database.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

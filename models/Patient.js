@@ -1,4 +1,5 @@
 const DataTypes = require("sequelize");
+const { Op } = require("sequelize");
 
 const PatientModel = {
   id: {
@@ -26,7 +27,7 @@ const PatientModel = {
   address: {
     type: DataTypes.STRING,
     allowNull: false,
-  }
+  },
 };
 
 module.exports = {
@@ -45,25 +46,26 @@ module.exports = {
           {
             as: "prescriptions",
             model: sequelize.model("prescription"),
-          }]
+          },
+        ],
       },
       freezeTableName: true,
       tableName: "patient",
     });
-    },
+  },
 
   associate: (sequelize) => {
     this.model.belongsTo(sequelize.model("insurance"));
     this.model.belongsToMany(sequelize.model("prescription"), {
-      through: 'patient_prescription',
-      foreignKey: 'patientId',
-      as: 'prescriptions',
+      through: "patient_prescription",
+      foreignKey: "patientId",
+      as: "prescriptions",
     });
     this.model.belongsToMany(sequelize.model("doctor"), {
-      through: 'patient_doctor',
+      through: "patient_doctor",
       foreignKey: "patientId",
       as: "doctors",
-    })
+    });
   },
 
   create: (patient) => {
@@ -81,9 +83,27 @@ module.exports = {
   },
 
   getAll: (query) => {
-    return this.model.findAll({
-      where: query,
-    });
+    console.log(query);
+    // Request from Postman
+    if (Object.keys(query).length === 0) {
+      return this.model.findAll({
+        where: query,
+      });
+    }
+    // For WHERE statements
+    else {
+      return this.model.findAll({
+        where: {
+          [Op.or]: [
+            { firstName: { [Op.like]: "%" + query.searchTerm + "%" } },
+            { lastName: { [Op.like]: "%" + query.searchTerm + "%" } },
+            { email: { [Op.like]: "%" + query.searchTerm + "%" } },
+            { phone: { [Op.like]: "%" + query.searchTerm + "%" } },
+            { address: { [Op.like]: "%" + query.searchTerm + "%" } },
+          ],
+        },
+      });
+    }
   },
 
   delete: (query) => {

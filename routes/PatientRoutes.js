@@ -3,26 +3,20 @@ const PatientController = require("../controllers/PatientController.js");
 const UserPermission = require("../middleware/UserPermission");
 const router = express.Router();
 
-router.get(
-    "/:patientId",
-    PatientController.get,
-);
+router.get("/:patientId", PatientController.get);
 
 router.get(
-    "/",
-    [UserPermission.checkPermission('admin')],
-    PatientController.getAll,
+  "/",
+  // [UserPermission.checkPermission('admin')],
+  PatientController.getAll
 );
 
-router.post(
-    "/",
-    PatientController.create,
-);
+router.post("/", PatientController.create);
 
 router.patch(
-    "/:patientId",
-    [UserPermission.checkPermission('admin')],
-    PatientController.update,
+  "/:patientId",
+  // [UserPermission.checkPermission('admin')],
+  PatientController.update
 );
 
 /*
@@ -35,15 +29,15 @@ router.delete(
  */
 
 router.post(
-    "/:patientId/doctor",
-    [UserPermission.checkPermission('admin')],
-    PatientController.addDoctor,
-)
+  "/:patientId/doctor",
+  // [UserPermission.checkPermission('admin')],
+  PatientController.addDoctor
+);
 
 router.post(
-    "/:patientId/prescription",
-    [UserPermission.checkPermission('admin')],
-    PatientController.addPrescription,
-)
+  "/:patientId/prescription",
+  //   [UserPermission.checkPermission("admin")],
+  PatientController.addPrescription
+);
 
 module.exports = router;

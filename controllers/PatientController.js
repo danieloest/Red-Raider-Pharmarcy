@@ -10,22 +10,24 @@ module.exports = {
     } = req;
 
     PatientModel.get(patientId)
-        .then((patient) => {
-          return res.status(200).json({
-            status: true,
-            data: patient,
-          })})
-        .catch((err) => {
-          console.log(err);
-          return res.status(500).json({
-            status: false,
-            error: "Patient was not found.",
-          });
+      .then((patient) => {
+        return res.status(200).json({
+          status: true,
+          data: patient,
         });
+      })
+      .catch((err) => {
+        console.log(err);
+        return res.status(500).json({
+          status: false,
+          error: "Patient was not found.",
+        });
+      });
   },
 
   create: (req, res) => {
-    const {firstName, lastName, email, phone, address, insuranceId} = req.body;
+    const { firstName, lastName, email, phone, address, insuranceId } =
+      req.body;
 
     if (!Object.keys(req.body).length) {
       return res.status(400).json({
@@ -42,31 +44,36 @@ module.exports = {
       email,
       phone,
       address,
-      insuranceId
-    }
+      insuranceId,
+    };
 
-    InsuranceModel.get( insuranceId)
-        .then(
-            PatientModel.create(patient, {insuranceId: insuranceId})
-                .then((patient) => {
-                  return res.status(201).json({
-                    status: true,
-                    data: patient,
-                  })})
-                .catch((err) => {
-                  console.log(err);
-                  return res.status(500).json({
-                    status: false,
-                    error: "Patient was not created.",
-                  });
-                })
-        )
-        .catch(() => {
-          return res.status(500).json({
-            status: false,
-            error: "Insurance does not exist",
+    InsuranceModel.get(insuranceId)
+      .then((insurance) => {
+        PatientModel.create(patient, { insuranceId: insuranceId })
+          .then((patient) => {
+            console.log("insurance: ");
+            console.log(insurance);
+            patient.dataValues.insurance = insurance.dataValues.name;
+            return res.render("newPatientConfirmation.ejs", { patient });
+            // return res.status(201).json({
+            //   status: true,
+            //   data: patient,
+            // });
+          })
+          .catch((err) => {
+            console.log(err);
+            return res.status(500).json({
+              status: false,
+              error: "Patient was not created.",
+            });
           });
-        })
+      })
+      .catch(() => {
+        return res.status(500).json({
+          status: false,
+          error: "Insurance does not exist",
+        });
+      });
   },
 
   update: (req, res) => {
@@ -85,18 +92,19 @@ module.exports = {
     }
 
     PatientModel.update({ id: patientId }, payload)
-        .then((patient) => {
-          return res.status(200).json({
-            status: true,
-            data: patient,
-          })})
-        .catch((err) => {
-          console.log(err);
-          return res.status(500).json({
-            status: false,
-            error: "Patient was not updated.",
-          });
+      .then((patient) => {
+        return res.status(200).json({
+          status: true,
+          data: patient,
         });
+      })
+      .catch((err) => {
+        console.log(err);
+        return res.status(500).json({
+          status: false,
+          error: "Patient was not updated.",
+        });
+      });
   },
 
   delete: (req, res) => {
@@ -124,18 +132,19 @@ module.exports = {
 
   getAll: (req, res) => {
     PatientModel.getAll(req.query)
-        .then((patients) => {
-          return res.status(200).json({
-            status: true,
-            data: patients,
-          })})
-        .catch((err) => {
-          console.log(err);
-          return res.status(500).json({
-            status: false,
-            error: "Patients were not found.",
-          });
+      .then((patients) => {
+        return res.status(200).json({
+          status: true,
+          data: patients,
         });
+      })
+      .catch((err) => {
+        console.log(err);
+        return res.status(500).json({
+          status: false,
+          error: "Patients were not found.",
+        });
+      });
   },
 
   addDoctor: (req, res) => {
@@ -161,21 +170,21 @@ module.exports = {
     };
 
     PatientDoctorModel.findOrCreate(patientDoctor)
-        .then(([data]) => {
-          res.status(201).json({
-            status: true,
-            data: data
-          });
-        })
-        .catch((err) => {
-          console.log(err);
-          res.status(500).json({
-            status: false,
-            error: {
-              message: "Patient or Doctor does not exist.",
-            },
-          })
+      .then(([data]) => {
+        res.status(201).json({
+          status: true,
+          data: data,
         });
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json({
+          status: false,
+          error: {
+            message: "Patient or Doctor does not exist.",
+          },
+        });
+      });
   },
 
   addPrescription: (req, res) => {
@@ -197,26 +206,26 @@ module.exports = {
     const datePrescribed = payload.datePrescribed;
 
     const patientPrescription = {
-        patientId,
-        prescriptionId,
-        datePrescribed,
+      patientId,
+      prescriptionId,
+      datePrescribed,
     };
 
     PatientPrescriptionModel.findOrCreate(patientPrescription)
-        .then(([data]) => {
-          res.status(201).json({
-            status: true,
-            data: data
-          });
-        })
-        .catch((err) => {
-          console.log(err);
-          res.status(500).json({
-            status: false,
-            error: {
-              message: "Patient or Prescription does not exist.",
-            },
-          })
+      .then(([data]) => {
+        res.status(201).json({
+          status: true,
+          data: data,
         });
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json({
+          status: false,
+          error: {
+            message: "Patient or Prescription does not exist.",
+          },
+        });
+      });
   },
 };

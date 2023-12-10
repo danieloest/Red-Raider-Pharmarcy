@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const bodyParser = require("body-parser");
 const { initLiquibase } = require("./database");
 const UserRoutes = require("./routes/UserRoutes");
@@ -20,8 +21,12 @@ app.set("view engine", "ejs");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 const port = 8080;
-
 app.use(express.json());
+// app.use(
+//   cors({
+//     origin: "*",
+//   })
+// );
 
 // Initialising Sequelize ORM
 const sequelize = new Sequelize({
@@ -32,6 +37,7 @@ const sequelize = new Sequelize({
   define: {
     timestamps: false,
   },
+  logQueryParameters: true,
 });
 
 // Initialising the Models on sequelize ORM
@@ -76,6 +82,24 @@ app.get("/status", (req, res) => {
 });
 app.get("/login", (req, res) => {
   res.render("login.ejs");
+});
+
+app.get("/patients", (req, res) => {
+  res.render("patients.ejs");
+});
+app.get("/createPatient", (req, res) => {
+  var insurances_promise = InsuranceModel.getAll();
+  insurances_promise.then((insurances) => {
+    res.render("createPatient.ejs", { insurances });
+  });
+});
+
+app.get("/newPatientConfirmation", (req, res) => {
+  res.render("newPatientConfirmation.ejs");
+});
+
+app.get("/errorPage", (req, res) => {
+  res.render("errorPage.ejs", { errorMessage: "An unkown error has occured." });
 });
 
 app.use(express.static("public"));
