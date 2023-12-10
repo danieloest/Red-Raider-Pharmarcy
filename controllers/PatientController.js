@@ -48,13 +48,17 @@ module.exports = {
     };
 
     InsuranceModel.get(insuranceId)
-      .then(
+      .then((insurance) => {
         PatientModel.create(patient, { insuranceId: insuranceId })
           .then((patient) => {
-            return res.status(201).json({
-              status: true,
-              data: patient,
-            });
+            console.log("insurance: ");
+            console.log(insurance);
+            patient.dataValues.insurance = insurance.dataValues.name;
+            return res.render("newPatientConfirmation.ejs", { patient });
+            // return res.status(201).json({
+            //   status: true,
+            //   data: patient,
+            // });
           })
           .catch((err) => {
             console.log(err);
@@ -62,8 +66,8 @@ module.exports = {
               status: false,
               error: "Patient was not created.",
             });
-          })
-      )
+          });
+      })
       .catch(() => {
         return res.status(500).json({
           status: false,

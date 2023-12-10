@@ -51,8 +51,7 @@
                       </td>
                       <td width="20%">
                         <div class="text-right">
-                          <% console.log(data) %>
-                          <span class="font-weight-bold"><%= data.dataValues.firstName + " " + data.dataValues.lastName %></span>
+                          <span class="font-weight-bold"><%= patient.dataValues.firstName + " " + patient.dataValues.lastName %></span>
                         </div>
                       </td>
                     </tr>
@@ -63,7 +62,7 @@
                         </td>
                         <td width="20%">
                           <div class="text-right">
-                            <span class="font-weight-bold"><%= data.dataValues.email%></span>
+                            <span class="font-weight-bold"><%= patient.dataValues.email%></span>
                           </div>
                         </td>
                       </tr>
@@ -75,7 +74,7 @@
                         </td>
                         <td width="20%">
                           <div class="text-right">
-                            <span class="font-weight-bold"><%= data.dataValues.phone %></span>
+                            <span class="font-weight-bold"><%= patient.dataValues.phone %></span>
                           </div>
                         </td>
                       </tr>
@@ -87,7 +86,7 @@
                         </td>
                         <td width="20%">
                           <div class="text-right">
-                            <span class="font-weight-bold"><%= data.dataValues.address %></span>
+                            <span class="font-weight-bold"><%= patient.dataValues.address %></span>
                           </div>
                         </td>
                       </tr>
@@ -99,7 +98,8 @@
                         </td>
                         <td width="20%">
                           <div class="text-right">
-                            <span class="font-weight-bold"><%= data.dataValues.insurance %></span>
+                            <% console.log(patient) %>
+                            <span class="font-weight-bold"><%= patient.dataValues.insurance %></span>
                           </div>
                         </td>
                       </tr>
