@@ -22,7 +22,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        console.log("page loaded");
         $.ajax({
           url: "http://localhost:8080/patient",
           method: "GET",
@@ -30,7 +29,6 @@
             // searchTerm: searchText,
           },
           success: function (response) {
-            console.log(response);
             let tableBody = document.getElementById("tableBody");
             tableBody.innerHTML = "";
 
@@ -40,7 +38,6 @@
             // Populate the table with data from the API response
             for (var i = 0; i < response.data.length; i++) {
               var patient = response.data[i];
-              console.log(patient.firstName);
               const row = document.createElement("tr");
               // add first name
               const firstNameTd = document.createElement("td");
@@ -116,7 +113,6 @@
             searchTerm: searchText,
           },
           success: function (response) {
-            console.log(response);
             let tableBody = document.getElementById("tableBody");
             tableBody.innerHTML = "";
 
@@ -126,7 +122,6 @@
             // Populate the table with data from the API response
             for (var i = 0; i < response.data.length; i++) {
               var patient = response.data[i];
-              console.log(patient.firstName);
               const row = document.createElement("tr");
               // add first name
               const firstNameTd = document.createElement("td");
