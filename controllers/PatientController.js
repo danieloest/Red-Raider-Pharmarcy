@@ -51,8 +51,6 @@ module.exports = {
       .then((insurance) => {
         PatientModel.create(patient, { insuranceId: insuranceId })
           .then((patient) => {
-            console.log("insurance: ");
-            console.log(insurance);
             patient.dataValues.insurance = insurance.dataValues.name;
             return res.render("newPatientConfirmation.ejs", { patient });
             // return res.status(201).json({
