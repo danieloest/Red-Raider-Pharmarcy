@@ -21,12 +21,18 @@ router.post(
 
 router.patch(
     "/:doctorId",
+    [UserPermission.checkPermission('admin')],
     DoctorController.update
 );
+
+/*
+Commented out b/c use case is not valid.
+Do not want to delete records and potentially orphan data as a result
 
 router.delete(
     "/:doctorId",
     DoctorController.delete
 );
+ */
 
 module.exports = router;

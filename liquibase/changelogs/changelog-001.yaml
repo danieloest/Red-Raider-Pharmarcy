@@ -188,6 +188,7 @@ databaseChangeLog:
               - column:
                   name: datePrescribed
                   type: DATETIME
+                  defaultValueComputed: CURRENT_TIMESTAMP
                   constraints:
                     nullable: false
           addPrimaryKey:
