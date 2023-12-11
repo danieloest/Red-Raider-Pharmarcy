@@ -23,6 +23,7 @@ const PatientPrescriptionModel = require("./models/PatientPrescription");
 const authRouter = require("./auth");
 const router = express.Router();
 const { auth, requiresAuth } = require("express-openid-connect");
+const https = require("https");
 
 const app = express();
 app.set("view engine", "ejs");
@@ -141,9 +142,7 @@ app.get("/status", (req, res) => {
   };
   res.send(status);
 });
-// app.get("/login", (req, res) => {
-//   // res.render("login.ejs");
-// });
+
 // Creating custom middleware with Express
 app.use((req, res, next) => {
   res.locals.isAuthenticated = req.isAuthenticated();
@@ -159,17 +158,12 @@ app.get("/", (req, res) => {
 app.get("/patients", (req, res) => {
   res.render("patients.ejs");
 });
-// app.get("/createPatient", (req, res) => {
-//   var insurances_promise = InsuranceModel.getAll();
-//   insurances_promise.then((insurances) => {
-//     res.render("createPatient.ejs", { insurances });
-//   });
-// })
 
 app.get("/createPatient", secured, (req, res) => {
+  user_id = req.user.user_id;
   var insurances_promise = InsuranceModel.getAll();
   insurances_promise.then((insurances) => {
-    res.render("createPatient.ejs", { insurances });
+    res.render("createPatient.ejs", { insurances, user_id });
   });
 });
 
@@ -179,6 +173,12 @@ app.get("/newPatientConfirmation", (req, res) => {
 
 app.get("/errorPage", (req, res) => {
   res.render("errorPage.ejs", { errorMessage: "An unkown error has occured." });
+});
+
+app.get("/unauthorized", (req, res) => {
+  res.render("errorPage.ejs", {
+    errorMessage: "Your are unauthorized to view this page.",
+  });
 });
 
 app.get("/profile", requiresAuth(), (req, res) => {

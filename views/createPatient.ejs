@@ -18,7 +18,40 @@
 
     <!-- Bootstrap core CSS -->
     <link href="/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
+
+document.addEventListener("DOMContentLoaded", function () {
+  console.log("loaded")
+  var settings = {
+  "url": "https://dev-ymrwl54nf7tekode.us.webtask.run/adf6e2f2b84784b57522e3b19dfc9201/api/roles",
+  "method": "GET",
+  "timeout": 0,
+  "headers": {
+    "Authorization": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ik9WeVhMN3JnNVlaQXkxdmUzZDlEVCJ9.eyJpc3MiOiJodHRwczovL2Rldi15bXJ3bDU0bmY3dGVrb2RlLnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJ6TDBXb0M0aVBFN2dmakVxZ0h1SzRkRHRrYmllQmxwR0BjbGllbnRzIiwiYXVkIjoidXJuOmF1dGgwLWF1dGh6LWFwaSIsImlhdCI6MTcwMjI2NDYxOSwiZXhwIjoxNzAyMzUxMDE5LCJhenAiOiJ6TDBXb0M0aVBFN2dmakVxZ0h1SzRkRHRrYmllQmxwRyIsInNjb3BlIjoicmVhZDp1c2VycyByZWFkOmFwcGxpY2F0aW9ucyByZWFkOmNvbm5lY3Rpb25zIHJlYWQ6Y29uZmlndXJhdGlvbiB1cGRhdGU6Y29uZmlndXJhdGlvbiByZWFkOmdyb3VwcyBjcmVhdGU6Z3JvdXBzIHVwZGF0ZTpncm91cHMgZGVsZXRlOmdyb3VwcyByZWFkOnJvbGVzIGNyZWF0ZTpyb2xlcyB1cGRhdGU6cm9sZXMgZGVsZXRlOnJvbGVzIHJlYWQ6cGVybWlzc2lvbnMgY3JlYXRlOnBlcm1pc3Npb25zIHVwZGF0ZTpwZXJtaXNzaW9ucyBkZWxldGU6cGVybWlzc2lvbnMgcmVhZDpyZXNvdXJjZS1zZXJ2ZXIgY3JlYXRlOnJlc291cmNlLXNlcnZlciB1cGRhdGU6cmVzb3VyY2Utc2VydmVyIGRlbGV0ZTpyZXNvdXJjZS1zZXJ2ZXIiLCJndHkiOiJjbGllbnQtY3JlZGVudGlhbHMifQ.ll64uwwGLFqMKbHMiZN9Mi5i7JOzLmSnDhv_BV0DPqjJu-qhnti4DtdMJHbo6WqUXYD-msAuP1aU-mPNPqG2KWARNq0DqdhS1xcundDA_MfJT_rhsK2gYujySXx-7aCp_809qKEGH6tNMQTW4qQSl3jbecvi5ji3Rf40B9qTqkAL649LfYTWQbAlzOTDSaJ797kKIfUKat3gCDFwL5jcN-Y0RA123pPZ716PCcV6dZBd_4Nr-Hru4xZHb4_LYCYpoAGufizvxv-13gX2-NLGhvmgsbna7anXmqtdi_01p9l7rqfEjc-SwnnBJmdXa9ElcKTd5L3l6JIA4itwhWhR-Q",
+    // "Cookie": "AWSELB=6450b1ba4b5f4dd44789de039e4ac689|a67f5b9d4df2d19a7a9496672c270c1a"
+  },
+};
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+  var user_id = '<%- user_id %>'
+  // const user_id = JSON.parse('')
+  // console.log(response.roles[0].users)
+  // console.log(user_id)
+  if (response.roles[0].users.includes(user_id)) {
+    console.log("right role")
+    $('#mainBody').show();
+  } else {
+    console.log("wrong role")
+    window.location.replace("http://localhost:8080/unauthorized");
+  }
+});
+ 
+      });
+   
+
+
       function validate() {
         let firstName = document.getElementById("firstName").value;
         let lastName = document.getElementById("lastName").value;
@@ -59,7 +92,7 @@
   </head>
   <body class="bg-light">
     <div class="container">
-      <main>
+      <main id="mainBody" style="display:none">
         <div class="py-5 text-center">
           <img
             class="d-block mx-auto mb-4"
