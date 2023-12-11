@@ -154,7 +154,8 @@ app.use((req, res, next) => {
 app.use("/", authRouter);
 
 app.get("/", (req, res) => {
-  res.render("index.pug");
+  // res.render("index.pug");
+  res.render("home.ejs");
 });
 
 app.get("/patients", (req, res) => {
