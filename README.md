@@ -1,4 +1,9 @@
-## Pre-requisites
+# 💊 Red Raider Pharmacy
+
+This readme covers the pre-requisites and start-up directions for how to get the
+database configured and run the application locally.
+
+## ⚙️ Pre-requisites
 - npm
 - mysql
 - liquibase
@@ -22,11 +27,11 @@ AUTH_API_HOST=dev-ymrwl54nf7tekode.us.webtask.run
 AUTH0_API_KEY=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ik9WeVhMN3JnNVlaQXkxdmUzZDlEVCJ9.eyJpc3MiOiJodHRwczovL2Rldi15bXJ3bDU0bmY3dGVrb2RlLnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJ6TDBXb0M0aVBFN2dmakVxZ0h1SzRkRHRrYmllQmxwR0BjbGllbnRzIiwiYXVkIjoidXJuOmF1dGgwLWF1dGh6LWFwaSIsImlhdCI6MTcwMjI2NDYxOSwiZXhwIjoxNzAyMzUxMDE5LCJhenAiOiJ6TDBXb0M0aVBFN2dmakVxZ0h1SzRkRHRrYmllQmxwRyIsInNjb3BlIjoicmVhZDp1c2VycyByZWFkOmFwcGxpY2F0aW9ucyByZWFkOmNvbm5lY3Rpb25zIHJlYWQ6Y29uZmlndXJhdGlvbiB1cGRhdGU6Y29uZmlndXJhdGlvbiByZWFkOmdyb3VwcyBjcmVhdGU6Z3JvdXBzIHVwZGF0ZTpncm91cHMgZGVsZXRlOmdyb3VwcyByZWFkOnJvbGVzIGNyZWF0ZTpyb2xlcyB1cGRhdGU6cm9sZXMgZGVsZXRlOnJvbGVzIHJlYWQ6cGVybWlzc2lvbnMgY3JlYXRlOnBlcm1pc3Npb25zIHVwZGF0ZTpwZXJtaXNzaW9ucyBkZWxldGU6cGVybWlzc2lvbnMgcmVhZDpyZXNvdXJjZS1zZXJ2ZXIgY3JlYXRlOnJlc291cmNlLXNlcnZlciB1cGRhdGU6cmVzb3VyY2Utc2VydmVyIGRlbGV0ZTpyZXNvdXJjZS1zZXJ2ZXIiLCJndHkiOiJjbGllbnQtY3JlZGVudGlhbHMifQ.ll64uwwGLFqMKbHMiZN9Mi5i7JOzLmSnDhv_BV0DPqjJu-qhnti4DtdMJHbo6WqUXYD-msAuP1aU-mPNPqG2KWARNq0DqdhS1xcundDA_MfJT_rhsK2gYujySXx-7aCp_809qKEGH6tNMQTW4qQSl3jbecvi5ji3Rf40B9qTqkAL649LfYTWQbAlzOTDSaJ797kKIfUKat3gCDFwL5jcN-Y0RA123pPZ716PCcV6dZBd_4Nr-Hru4xZHb4_LYCYpoAGufizvxv-13gX2-NLGhvmgsbna7anXmqtdi_01p9l7rqfEjc-SwnnBJmdXa9ElcKTd5L3l6JIA4itwhWhR-Q
 ```
 
-## Running the application
+## 💿 Running the application
 1. Run `make run-dev` or `npm run dev`
 2. Open browser and go to `http://localhost:8080/`
 
-## Liquibase
+## 🌊 Liquibase
 
 [Liquibase](https://docs.liquibase.com/home.html) is a database migration tool that 
 is leveraged in this project to manage database schema and seed data insertion.
@@ -53,8 +58,15 @@ See process below:
 - Create liquibase migration to run sql insert statements as part of migration. ex. `changelog-0003.yaml`
 
 
-## Sequelize
+## 💾 Sequelize
 
 [Sequelize](https://sequelize.org/) is leveraged as the ORM (Object Relational Mapping) to sync the 
 schema of models with the database. Sequelize provides functionality to access, update, and delete records
 that could be tied together with a repository pattern or abstracting direct SQL queries.
+
+## 📫 Postman
+
+[Postman](https://www.postman.com/) is a software tool to test your API endpoints and 
+validate backend functionality. This project leverages Postman and includes the collection
+that can be [imported](https://learning.postman.com/docs/getting-started/importing-and-exporting/importing-and-exporting-overview/) 
+from the postman folder in this repository.
