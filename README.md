@@ -48,6 +48,6 @@ See process below:
 
 ## Sequelize
 
-[Sequelize](https://sequelize.org/) is leveraged as the ORM (Object Relational Mapping) to tie sync the 
+[Sequelize](https://sequelize.org/) is leveraged as the ORM (Object Relational Mapping) to sync the 
 schema of models with the database. Sequelize provides functionality to access, update, and delete records
 that could be tied together with a repository pattern or abstracting direct SQL queries.
