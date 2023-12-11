@@ -1,0 +1,23 @@
+<% extends('layout') %> <% block content %>
+<div class="View WelcomeView">
+  <h1 class="Banner">WHATABYTE</h1>
+  <div class="Message">
+    <div class="Title">
+      <h3>Making the Best</h3>
+      <h1>Food For Devs</h1>
+    </div>
+    <span class="Details">Access the WHATABYTE Team Portal</span>
+  </div>
+  <div class="NavButtons">
+    <% if (isAuthenticated) { %>
+    <a href="/user">
+      <div class="NavButton">Just dive in!</div>
+    </a>
+    <% } else { %>
+    <a href="/login">
+      <div class="NavButton">Log in</div>
+    </a>
+    <% } %>
+  </div>
+</div>
+<% endblock %>
