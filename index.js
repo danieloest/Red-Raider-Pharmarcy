@@ -4,7 +4,6 @@ const expressSession = require("express-session");
 const passport = require("passport");
 const Auth0Strategy = require("passport-auth0");
 require("dotenv").config();
-const cors = require("cors");
 const bodyParser = require("body-parser");
 const { initLiquibase } = require("./database");
 const UserRoutes = require("./routes/UserRoutes");
@@ -23,7 +22,6 @@ const PatientPrescriptionModel = require("./models/PatientPrescription");
 const authRouter = require("./auth");
 const router = express.Router();
 const { auth, requiresAuth } = require("express-openid-connect");
-const https = require("https");
 
 const app = express();
 app.set("view engine", "ejs");
